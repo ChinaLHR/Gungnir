@@ -57,7 +57,7 @@ public class GungnirServerFactory implements ApplicationContextAware,Initializin
 
     @Override
     public void afterPropertiesSet() throws Exception {
-
+        //TODO 启动服务器 Zookeeper注册Service，在获取Service的时候进行负载均衡
     }
 
     /**

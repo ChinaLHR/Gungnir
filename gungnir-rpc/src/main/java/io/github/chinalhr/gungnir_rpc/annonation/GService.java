@@ -22,6 +22,4 @@ public @interface GService {
      * @return
      */
     Class<?> value();
-
-    
 }
