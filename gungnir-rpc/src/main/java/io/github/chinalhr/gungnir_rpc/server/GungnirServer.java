@@ -3,12 +3,14 @@ package io.github.chinalhr.gungnir_rpc.server;
 import io.github.chinalhr.gungnir_rpc.serializer.ISerializer;
 
 import io.netty.bootstrap.ServerBootstrap;
+import io.netty.channel.ChannelFuture;
 import io.netty.channel.DefaultEventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -23,10 +25,8 @@ public class GungnirServer implements IServer{
     private NioEventLoopGroup bossGroup;
     private NioEventLoopGroup workGroup;
     private ServerBootstrap bootstrap;
-
-    public GungnirServer(int port,) {
-
-    }
+    private ChannelFuture future;
+    private ScheduledExecutorService executorService;
 
     @Override
     public void init() {
@@ -49,10 +49,14 @@ public class GungnirServer implements IServer{
         });
 
         bootstrap = new ServerBootstrap();
+        executorService = Executors.newScheduledThreadPool(2);
     }
 
     @Override
     public void start(int port, ISerializer serializer) {
+        LOGGER.info("GungnirServer start");
+        
+        //TODO 进行心跳检测Ping与Channel清理工作
 
     }
 

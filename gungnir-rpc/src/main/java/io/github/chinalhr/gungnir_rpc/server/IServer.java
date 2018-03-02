@@ -1,6 +1,5 @@
 package io.github.chinalhr.gungnir_rpc.server;
 
-import io.github.chinalhr.gungnir_rpc.common.SerializeEnum;
 import io.github.chinalhr.gungnir_rpc.serializer.ISerializer;
 
 /**

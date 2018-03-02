@@ -50,6 +50,7 @@ public class GungnirServerFactory implements ApplicationContextAware,Initializin
         this.zookeeper = zookeeper;
     }
 
+
     @Override
     public void destroy() throws Exception {
 
