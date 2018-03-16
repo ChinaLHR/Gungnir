@@ -1,4 +1,4 @@
-package io.github.chinalhr.gungnir_rpc.annonation;
+package io.github.chinalhr.gungnir.annonation;
 
 import org.springframework.stereotype.Component;
 

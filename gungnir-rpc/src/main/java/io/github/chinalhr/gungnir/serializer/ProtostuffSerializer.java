@@ -1,4 +1,4 @@
-package io.github.chinalhr.gungnir_rpc.serializer;
+package io.github.chinalhr.gungnir.serializer;
 
 import com.dyuproject.protostuff.LinkedBuffer;
 import com.dyuproject.protostuff.ProtostuffIOUtil;
@@ -11,6 +11,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
+ * Protostuf序列化
+ *
  * @Author : ChinaLHR
  * @Date : Create in 22:15 2018/1/5
  * @Email : 13435500980@163.com

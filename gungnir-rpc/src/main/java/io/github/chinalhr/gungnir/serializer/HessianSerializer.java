@@ -1,4 +1,4 @@
-package io.github.chinalhr.gungnir_rpc.serializer;
+package io.github.chinalhr.gungnir.serializer;
 
 import com.caucho.hessian.io.HessianInput;
 import com.caucho.hessian.io.HessianOutput;
@@ -8,6 +8,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 /**
+ * Hessian序列化
+ *
  * @Author : ChinaLHR
  * @Date : Create in 22:03 2018/1/5
  * @Email : 13435500980@163.com

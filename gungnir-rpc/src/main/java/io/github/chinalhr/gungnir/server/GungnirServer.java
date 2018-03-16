@@ -1,14 +1,19 @@
-package io.github.chinalhr.gungnir_rpc.server;
+package io.github.chinalhr.gungnir.server;
 
-import io.github.chinalhr.gungnir_rpc.serializer.ISerializer;
+import io.github.chinalhr.gungnir.serializer.ISerializer;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.DefaultEventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.SocketChannel;
+import io.netty.channel.socket.nio.NioServerSocketChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.net.InetSocketAddress;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -24,13 +29,13 @@ public class GungnirServer implements IServer{
     private DefaultEventLoopGroup defaultGroup;
     private NioEventLoopGroup bossGroup;
     private NioEventLoopGroup workGroup;
-    private ServerBootstrap bootstrap;
+    private ServerBootstrap bootStrap;
     private ChannelFuture future;
     private ScheduledExecutorService executorService;
 
     @Override
     public void init() {
-        LOGGER.info("GungnirServer init ");
+        LOGGER.info("GungnirServer Init");
         int cpu = Runtime.getRuntime().availableProcessors();
 
         defaultGroup = new DefaultEventLoopGroup(8,(r)->{
@@ -48,14 +53,28 @@ public class GungnirServer implements IServer{
             return new Thread(r,"WORKGROUP"+integer.incrementAndGet());
         });
 
-        bootstrap = new ServerBootstrap();
+        bootStrap = new ServerBootstrap();
         executorService = Executors.newScheduledThreadPool(2);
     }
 
     @Override
     public void start(int port, ISerializer serializer) {
         LOGGER.info("GungnirServer start");
-        
+        bootStrap.group(bossGroup,workGroup)
+                .channel(NioServerSocketChannel.class)
+                .option(ChannelOption.SO_KEEPALIVE,true)//连接保活
+                .option(ChannelOption.TCP_NODELAY,true)//禁用Nagle算法
+                .option(ChannelOption.SO_BACKLOG,1024)//设置队列长度
+                .localAddress(new InetSocketAddress(port))
+                .childHandler(new ChannelInitializer<SocketChannel>() {
+                    @Override
+                    protected void initChannel(SocketChannel ch) throws Exception {
+                        ch.pipeline();
+//                                .addLast(defaultGroup,)
+
+                    }
+                });
+
         //TODO 进行心跳检测Ping与Channel清理工作
 
     }

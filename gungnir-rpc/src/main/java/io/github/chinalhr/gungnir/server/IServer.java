@@ -1,6 +1,6 @@
-package io.github.chinalhr.gungnir_rpc.server;
+package io.github.chinalhr.gungnir.server;
 
-import io.github.chinalhr.gungnir_rpc.serializer.ISerializer;
+import io.github.chinalhr.gungnir.serializer.ISerializer;
 
 /**
  * @Author : ChinaLHR

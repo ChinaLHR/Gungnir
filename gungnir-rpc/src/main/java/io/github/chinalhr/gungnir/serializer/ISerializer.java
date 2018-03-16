@@ -1,4 +1,4 @@
-package io.github.chinalhr.gungnir_rpc.serializer;
+package io.github.chinalhr.gungnir.serializer;
 
 /**
  * @Author : ChinaLHR

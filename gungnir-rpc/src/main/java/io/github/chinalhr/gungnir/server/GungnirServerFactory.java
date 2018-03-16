@@ -1,8 +1,8 @@
-package io.github.chinalhr.gungnir_rpc.server;
+package io.github.chinalhr.gungnir.server;
 
-import io.github.chinalhr.gungnir_rpc.annonation.GService;
-import io.github.chinalhr.gungnir_rpc.common.SerializeEnum;
-import io.github.chinalhr.gungnir_rpc.serializer.ISerializer;
+import io.github.chinalhr.gungnir.annonation.GService;
+import io.github.chinalhr.gungnir.common.SerializeEnum;
+import io.github.chinalhr.gungnir.serializer.ISerializer;
 import org.apache.commons.collections4.MapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

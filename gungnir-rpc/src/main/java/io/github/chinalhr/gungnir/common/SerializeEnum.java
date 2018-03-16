@@ -1,8 +1,8 @@
-package io.github.chinalhr.gungnir_rpc.common;
+package io.github.chinalhr.gungnir.common;
 
-import io.github.chinalhr.gungnir_rpc.serializer.HessianSerializer;
-import io.github.chinalhr.gungnir_rpc.serializer.ISerializer;
-import io.github.chinalhr.gungnir_rpc.serializer.ProtostuffSerializer;
+import io.github.chinalhr.gungnir.serializer.HessianSerializer;
+import io.github.chinalhr.gungnir.serializer.ISerializer;
+import io.github.chinalhr.gungnir.serializer.ProtostuffSerializer;
 
 /**
  * @Author : ChinaLHR
