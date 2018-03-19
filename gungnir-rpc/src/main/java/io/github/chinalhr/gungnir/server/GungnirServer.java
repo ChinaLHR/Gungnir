@@ -1,5 +1,10 @@
 package io.github.chinalhr.gungnir.server;
 
+import io.github.chinalhr.gungnir.handler.GServerHandler;
+import io.github.chinalhr.gungnir.handler.codec.GDecoder;
+import io.github.chinalhr.gungnir.handler.codec.GEncoder;
+import io.github.chinalhr.gungnir.protocol.GRequest;
+import io.github.chinalhr.gungnir.protocol.GResponse;
 import io.github.chinalhr.gungnir.serializer.ISerializer;
 
 import io.netty.bootstrap.ServerBootstrap;
@@ -69,8 +74,12 @@ public class GungnirServer implements IServer{
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel ch) throws Exception {
-                        ch.pipeline();
-//                                .addLast(defaultGroup,)
+                        ch.pipeline()
+                                .addLast(defaultGroup,
+                                        new GDecoder(GRequest.class,serializer),
+                                        new GEncoder(GResponse.class,serializer),
+                                        new GServerHandler()
+                                );
 
                     }
                 });

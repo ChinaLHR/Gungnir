@@ -18,6 +18,8 @@ public class GRequest implements Serializable{
 
     private String className;
 
+    private String version;
+
     private String methodName;
 
     private Class<?>[] parameterTypes;
@@ -72,12 +74,21 @@ public class GRequest implements Serializable{
         this.parameters = parameters;
     }
 
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
     @Override
     public String toString() {
         return "GRequest{" +
                 "requestID='" + requestID + '\'' +
                 ", createMillisTime=" + createMillisTime +
                 ", className='" + className + '\'' +
+                ", version='" + version + '\'' +
                 ", methodName='" + methodName + '\'' +
                 ", parameterTypes=" + Arrays.toString(parameterTypes) +
                 ", parameters=" + Arrays.toString(parameters) +

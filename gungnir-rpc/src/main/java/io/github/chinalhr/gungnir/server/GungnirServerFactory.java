@@ -71,9 +71,15 @@ public class GungnirServerFactory implements ApplicationContextAware,Initializin
         Map<String, Object> serviceBeanMap = applicationContext.getBeansWithAnnotation(GService.class);
         if(!MapUtils.isEmpty(serviceBeanMap)){
             for (Object serviceBean : serviceBeanMap.values()) {
-                String interfaceName = serviceBean.getClass().getAnnotation(GService.class).value().getName();
-                serviceMap.put(interfaceName,serviceBean);
+                GService annotation = serviceBean.getClass().getAnnotation(GService.class);
+                String serviceName = annotation.value().getName()+'-'+annotation.verson();
+
+                serviceMap.put(serviceName,serviceBean);
             }
         }
+        InvokeOperation.setServiceMap(serviceMap);
     }
+
+
+
 }

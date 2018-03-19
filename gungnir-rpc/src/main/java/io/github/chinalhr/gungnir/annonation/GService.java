@@ -22,4 +22,10 @@ public @interface GService {
      * @return
      */
     Class<?> value();
+
+    /**
+     * 服务版本号
+     * @return
+     */
+    String verson() default "";
 }
