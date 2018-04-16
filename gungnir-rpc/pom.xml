@@ -93,7 +93,8 @@
         <dependency>
             <groupId>com.101tec</groupId>
             <artifactId>zkclient</artifactId>
-            <version>0.4</version>
+            <version>0.10</version>
         </dependency>
+
     </dependencies>
 </project>

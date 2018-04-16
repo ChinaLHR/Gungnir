@@ -1,4 +1,4 @@
-package io.github.chinalhr.gungnir.handler;
+package io.github.chinalhr.gungnir.server.netty.handler;
 
 import io.github.chinalhr.gungnir.protocol.GRequest;
 import io.github.chinalhr.gungnir.protocol.GResponse;

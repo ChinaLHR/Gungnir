@@ -11,8 +11,8 @@ public interface IServer {
 
     void init();
 
-    void start(int port, ISerializer serializer);
+    void start(String ip,int port, ISerializer serializer);
 
-    void destory();
+    void stop();
 
 }

@@ -1,4 +1,4 @@
-package io.github.chinalhr.gungnir.handler.codec;
+package io.github.chinalhr.gungnir.server.netty.codec;
 
 import io.github.chinalhr.gungnir.serializer.ISerializer;
 import io.netty.buffer.ByteBuf;

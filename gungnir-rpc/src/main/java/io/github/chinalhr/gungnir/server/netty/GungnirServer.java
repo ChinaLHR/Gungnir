@@ -1,12 +1,13 @@
-package io.github.chinalhr.gungnir.server;
+package io.github.chinalhr.gungnir.server.netty;
 
-import io.github.chinalhr.gungnir.handler.GServerHandler;
-import io.github.chinalhr.gungnir.handler.codec.GDecoder;
-import io.github.chinalhr.gungnir.handler.codec.GEncoder;
 import io.github.chinalhr.gungnir.protocol.GRequest;
 import io.github.chinalhr.gungnir.protocol.GResponse;
 import io.github.chinalhr.gungnir.serializer.ISerializer;
 
+import io.github.chinalhr.gungnir.server.IServer;
+import io.github.chinalhr.gungnir.server.netty.codec.GDecoder;
+import io.github.chinalhr.gungnir.server.netty.codec.GEncoder;
+import io.github.chinalhr.gungnir.server.netty.handler.GServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -28,7 +29,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @Date : Create in 23:16 2018/1/5
  * @Email : 13435500980@163.com
  */
-public class GungnirServer implements IServer{
+public class GungnirServer implements IServer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GungnirServer.class);
     private DefaultEventLoopGroup defaultGroup;
@@ -63,14 +64,13 @@ public class GungnirServer implements IServer{
     }
 
     @Override
-    public void start(int port, ISerializer serializer) {
+    public void start(String ip,int port, ISerializer serializer) {
         LOGGER.info("GungnirServer start");
         bootStrap.group(bossGroup,workGroup)
                 .channel(NioServerSocketChannel.class)
                 .option(ChannelOption.SO_KEEPALIVE,true)//连接保活
                 .option(ChannelOption.TCP_NODELAY,true)//禁用Nagle算法
                 .option(ChannelOption.SO_BACKLOG,1024)//设置队列长度
-                .localAddress(new InetSocketAddress(port))
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel ch) throws Exception {
@@ -82,14 +82,31 @@ public class GungnirServer implements IServer{
                                 );
 
                     }
+
+
                 });
 
-        //TODO 进行心跳检测Ping与Channel清理工作
+        try {
+            bootStrap.bind(ip,port).sync();
+
+            LOGGER.info("GungnirServer start success ,host is :"+ip+",port is:"+port);
+            //TODO 进行心跳检测Ping与Channel清理工作
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            LOGGER.error("GungnirServer Start Error:{}",e.getLocalizedMessage());
+        }
+
+
 
     }
 
     @Override
-    public void destory() {
+    public void stop() {
+        if (defaultGroup!=null) defaultGroup.shutdownGracefully();
+        if (executorService!=null)executorService.shutdown();
 
+        bossGroup.shutdownGracefully();
+        workGroup.shutdownGracefully();
     }
 }

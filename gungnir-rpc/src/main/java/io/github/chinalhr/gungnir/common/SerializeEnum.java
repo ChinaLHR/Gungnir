@@ -18,7 +18,7 @@ public enum SerializeEnum {
 
     public final ISerializer serializer;
 
-    SerializeEnum(ISerializer serializer) {
+    private SerializeEnum(ISerializer serializer) {
         this.serializer = serializer;
     }
 

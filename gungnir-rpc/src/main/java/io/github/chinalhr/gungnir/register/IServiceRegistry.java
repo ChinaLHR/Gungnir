@@ -7,8 +7,8 @@ package io.github.chinalhr.gungnir.register;
  *
  * 服务注册接口
  */
-public interface ServiceRegistry {
+public interface IServiceRegistry {
 
-    void register(String ser);
+    void register(String serviceName,String serviceAddress);
 
 }

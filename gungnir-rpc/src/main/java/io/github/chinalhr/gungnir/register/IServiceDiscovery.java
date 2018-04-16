@@ -7,7 +7,7 @@ package io.github.chinalhr.gungnir.register;
  *
  * 服务发现接口
  */
-public interface ServiceDiscovery {
+public interface IServiceDiscovery {
 
     String discover(String serviceName);
 
