@@ -56,7 +56,7 @@ public class ZkServiceDiscovery implements IServiceDiscovery {
         }
         else
         {
-            //TODO 返回service的所有address
+            //TODO 此处为随机获取，应修改为返回service的所有address
             address = addressList.get(ThreadLocalRandom.current().nextInt(size));
             LOGGER.debug("get random address node: {}", address);
         }

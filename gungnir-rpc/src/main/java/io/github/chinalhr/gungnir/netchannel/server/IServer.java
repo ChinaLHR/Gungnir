@@ -1,4 +1,4 @@
-package io.github.chinalhr.gungnir.server;
+package io.github.chinalhr.gungnir.netchannel.server;
 
 import io.github.chinalhr.gungnir.serializer.ISerializer;
 
@@ -9,10 +9,22 @@ import io.github.chinalhr.gungnir.serializer.ISerializer;
  */
 public interface IServer {
 
+    /**
+     * 初始化Server
+     */
     void init();
 
+    /**
+     * 开启Server
+     * @param ip
+     * @param port
+     * @param serializer
+     */
     void start(String ip,int port, ISerializer serializer);
 
+    /**
+     * 停止Server
+     */
     void stop();
 
 }

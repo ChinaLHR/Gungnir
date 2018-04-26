@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="IDataServicce" class="io.github.chinalhr.gungnir.netchannel.client.GungnirClientProxy">
+        <property name="iclass" value="io.github.chinalhr.api.IDataService" />
+        <property name="serializer" value="PROTOSTUFF"/>
+        <property name="zkAddress" value="127.0.0.1:2181"/>
+        <property name="zkConnection_TimeOut" value="1000"/>
+        <property name="zkSession_TimeOut" value="5000"/>
+        <property name="timeoutMillis" value="5000"/>
+    </bean>
+</beans>

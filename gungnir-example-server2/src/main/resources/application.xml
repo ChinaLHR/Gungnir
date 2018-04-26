@@ -7,11 +7,11 @@
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-    <context:component-scan base-package="io.github.chinalhr.exampleserver" />
+    <context:component-scan base-package="io.github.chinalhr.exampleserver2" />
 
     <bean class="io.github.chinalhr.gungnir.netchannel.server.GungnirServerFactory">
         <property name="ip" value="127.0.0.1"/>
-        <property name="port" value="8000"/>
+        <property name="port" value="9000"/>
         <property name="serializer" value="PROTOSTUFF"/>
         <property name="zkAddress" value="127.0.0.1:2181"/>
         <property name="zkConnection_TimeOut" value="1000"/>

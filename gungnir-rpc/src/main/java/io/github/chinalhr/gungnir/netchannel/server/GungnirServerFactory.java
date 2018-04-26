@@ -1,11 +1,11 @@
-package io.github.chinalhr.gungnir.server;
+package io.github.chinalhr.gungnir.netchannel.server;
 
 import io.github.chinalhr.gungnir.annonation.GService;
 import io.github.chinalhr.gungnir.common.SerializeEnum;
 import io.github.chinalhr.gungnir.register.IServiceRegistry;
 import io.github.chinalhr.gungnir.register.zk.ZKServiceRegistry;
 import io.github.chinalhr.gungnir.serializer.ISerializer;
-import io.github.chinalhr.gungnir.server.netty.GungnirServer;
+import io.github.chinalhr.gungnir.netchannel.server.netty.GungnirServer;
 import org.apache.commons.collections4.MapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,8 +14,8 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.util.StringUtils;
 
-import javax.imageio.spi.ServiceRegistry;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -116,7 +116,7 @@ public class GungnirServerFactory implements ApplicationContextAware,Initializin
         if (serviceRegistry!=null){
             for (String interfaceName:serviceMap.keySet()){
                 serviceRegistry.register(interfaceName,serviceAddress);
-                LOGGER.debug("registry service:{} ————> {}",interfaceName,serviceAddress);
+                LOGGER.debug("GungnirServerFactory registry service:{} ————> {}",interfaceName,serviceAddress);
             }
         }
     }
@@ -133,8 +133,13 @@ public class GungnirServerFactory implements ApplicationContextAware,Initializin
         if(!MapUtils.isEmpty(serviceBeanMap)){
             for (Object serviceBean : serviceBeanMap.values()) {
                 GService annotation = serviceBean.getClass().getAnnotation(GService.class);
-                String serviceName = annotation.value().getName()+'-'+annotation.verson();
+                String serviceName = annotation.value().getName();
+                String version = annotation.version();
+                if (!StringUtils.isEmpty(version)){
+                    serviceName +="-"+version;
+                }
                 serviceMap.put(serviceName,serviceBean);
+
             }
         }
         InvokeOperation.setServiceMap(serviceMap);

@@ -27,5 +27,5 @@ public @interface GService {
      * 服务版本号
      * @return
      */
-    String verson() default "";
+    String version() default "";
 }

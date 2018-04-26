@@ -1,4 +1,4 @@
-package io.github.chinalhr.exampleserver;
+package io.github.chinalhr.exampleserver2;
 
 import io.github.chinalhr.api.IDataService;
 import io.github.chinalhr.gungnir.annonation.GService;
@@ -16,7 +16,7 @@ public class DataServiceImpl implements IDataService{
 
     @Override
     public String helloWorld() {
-        String s = "Gungnir Hello World by 8000";
+        String s = "Gungnir Hello World by 9000";
         System.out.println(s);
         return s;
     }

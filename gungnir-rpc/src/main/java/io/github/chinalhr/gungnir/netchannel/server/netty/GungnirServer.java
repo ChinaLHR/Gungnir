@@ -1,25 +1,20 @@
-package io.github.chinalhr.gungnir.server.netty;
+package io.github.chinalhr.gungnir.netchannel.server.netty;
 
 import io.github.chinalhr.gungnir.protocol.GRequest;
 import io.github.chinalhr.gungnir.protocol.GResponse;
 import io.github.chinalhr.gungnir.serializer.ISerializer;
 
-import io.github.chinalhr.gungnir.server.IServer;
-import io.github.chinalhr.gungnir.server.netty.codec.GDecoder;
-import io.github.chinalhr.gungnir.server.netty.codec.GEncoder;
-import io.github.chinalhr.gungnir.server.netty.handler.GServerHandler;
+import io.github.chinalhr.gungnir.netchannel.server.IServer;
+import io.github.chinalhr.gungnir.serializer.netty.GDecoder;
+import io.github.chinalhr.gungnir.serializer.netty.GEncoder;
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.DefaultEventLoopGroup;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.net.InetSocketAddress;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -36,7 +31,6 @@ public class GungnirServer implements IServer {
     private NioEventLoopGroup bossGroup;
     private NioEventLoopGroup workGroup;
     private ServerBootstrap bootStrap;
-    private ChannelFuture future;
     private ScheduledExecutorService executorService;
 
     @Override
@@ -46,17 +40,17 @@ public class GungnirServer implements IServer {
 
         defaultGroup = new DefaultEventLoopGroup(8,(r)->{
             AtomicInteger integer = new AtomicInteger(0);
-            return new Thread(r,"DEFAULTGROUP" + integer.incrementAndGet());
+            return new Thread(r,"ServerDefaultGroup" + integer.incrementAndGet());
         });
 
         bossGroup = new NioEventLoopGroup(cpu,(r)->{
             AtomicInteger integer = new AtomicInteger(0);
-            return new Thread(r,"BOSSGROUP"+integer.incrementAndGet());
+            return new Thread(r,"ServerBossGroup"+integer.incrementAndGet());
         });
 
         workGroup = new NioEventLoopGroup(cpu,(r)->{
             AtomicInteger integer = new AtomicInteger(0);
-            return new Thread(r,"WORKGROUP"+integer.incrementAndGet());
+            return new Thread(r,"ServerWorkGroup"+integer.incrementAndGet());
         });
 
         bootStrap = new ServerBootstrap();
@@ -68,19 +62,22 @@ public class GungnirServer implements IServer {
         LOGGER.info("GungnirServer start");
         bootStrap.group(bossGroup,workGroup)
                 .channel(NioServerSocketChannel.class)
-                .option(ChannelOption.SO_KEEPALIVE,true)//连接保活
-                .option(ChannelOption.TCP_NODELAY,true)//禁用Nagle算法
+                .childOption(ChannelOption.SO_KEEPALIVE,true)//连接保活
+//                .option(ChannelOption.TCP_NODELAY,true)//禁用Nagle算法
                 .option(ChannelOption.SO_BACKLOG,1024)//设置队列长度
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel ch) throws Exception {
-                        ch.pipeline()
-                                .addLast(defaultGroup,
-                                        new GDecoder(GRequest.class,serializer),
-                                        new GEncoder(GResponse.class,serializer),
-                                        new GServerHandler()
-                                );
-
+//                        ch.pipeline()
+//                                .addLast(defaultGroup,
+//                                        new GEncoder(GResponse.class,serializer),
+//                                        new GDecoder(GRequest.class,serializer),
+//                                        new GServerHandler()
+//                                );
+                        ChannelPipeline pipeline = ch.pipeline();
+                        pipeline.addLast(new GEncoder(GResponse.class,serializer));
+                        pipeline.addLast(new GDecoder(GRequest.class,serializer));
+                        pipeline.addLast(new GServerHandler());
                     }
 
 

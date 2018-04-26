@@ -6,14 +6,20 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="gungnir-example-api" />
+        <module name="gungnir-example-client" />
         <module name="gungnir-example-server" />
+        <module name="gungnir-example-server2" />
         <module name="gungnir-rpc" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="gungnir" target="1.8" />
       <module name="gungnir-example" target="1.8" />
+      <module name="gungnir-example-api" target="1.8" />
+      <module name="gungnir-example-client" target="1.8" />
       <module name="gungnir-example-server" target="1.8" />
+      <module name="gungnir-example-server2" target="1.8" />
       <module name="gungnir-rpc" target="1.8" />
     </bytecodeTargetLevel>
   </component>

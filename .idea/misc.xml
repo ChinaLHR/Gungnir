@@ -5,7 +5,19 @@
       <list>
         <option value="$PROJECT_DIR$/gungnir-rpc/pom.xml" />
         <option value="$PROJECT_DIR$/gungnir-example-server/pom.xml" />
+        <option value="$PROJECT_DIR$/gungnir-example-api/pom.xml" />
+        <option value="$PROJECT_DIR$/gungnir-example-client/pom.xml" />
+        <option value="$PROJECT_DIR$/gungnir-example-server2/pom.xml" />
+        <option value="$PROJECT_DIR$/gungnir-example/gungnir-example-api/pom.xml" />
+        <option value="$PROJECT_DIR$/gungnir-example/gungnir-example-client/pom.xml" />
+        <option value="$PROJECT_DIR$/gungnir-example/gungnir-example-server/pom.xml" />
+        <option value="$PROJECT_DIR$/gungnir-example/gungnir-example-server2/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/gungnir-example/g-api/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
