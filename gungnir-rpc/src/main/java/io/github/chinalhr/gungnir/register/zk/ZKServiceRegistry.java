@@ -2,6 +2,7 @@ package io.github.chinalhr.gungnir.register.zk;
 
 import io.github.chinalhr.gungnir.common.Constant;
 import io.github.chinalhr.gungnir.register.IServiceRegistry;
+import io.github.chinalhr.gungnir.utils.PropertyConfigeUtils;
 import org.I0Itec.zkclient.ZkClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,13 +16,21 @@ import org.slf4j.LoggerFactory;
  */
 public class ZKServiceRegistry implements IServiceRegistry {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ZKServiceRegistry.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ZkServiceDiscovery.class);
 
+    private String address;
+
+    private int zkSession_TimeOut;
+
+    private int zkConnection_TimeOut;
     private final ZkClient zkClient;
 
-    public ZKServiceRegistry(String zkAddress, int zkSession_TimeOut, int zkConnection_TimeOut) {
+    public ZKServiceRegistry() {
         //创建ZooKeeper客户端
-        zkClient = new ZkClient(zkAddress, zkSession_TimeOut,zkConnection_TimeOut);
+        this.address = PropertyConfigeUtils.getZkAddress();
+        this.zkSession_TimeOut = PropertyConfigeUtils.getZkSession_TimeOut();
+        this.zkConnection_TimeOut = PropertyConfigeUtils.getZkConnection_TimeOut();
+        zkClient = new ZkClient(address, zkSession_TimeOut,zkConnection_TimeOut);
         LOGGER.debug("connect zookeeper");
     }
 

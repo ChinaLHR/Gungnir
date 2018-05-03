@@ -24,8 +24,26 @@ public @interface GService {
     Class<?> value();
 
     /**
-     * 服务版本号
+     * 服务版本号 默认""
      * @return
      */
     String version() default "";
+
+    /**
+     * 权重 默认1
+     * @return
+     */
+    int weight() default 1;
+
+    /**
+     * 服务分组组名 默认default
+     * @return
+     */
+    String groupName() default "default";
+
+    /**
+     * 服务端线程数 默认10
+     * @return
+     */
+    int workerThreads() default 10;
 }

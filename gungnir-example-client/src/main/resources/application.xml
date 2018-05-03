@@ -6,10 +6,7 @@
 
     <bean id="IDataServicce" class="io.github.chinalhr.gungnir.netchannel.client.GungnirClientProxy">
         <property name="iclass" value="io.github.chinalhr.api.IDataService" />
-        <property name="serializer" value="PROTOSTUFF"/>
-        <property name="zkAddress" value="127.0.0.1:2181"/>
-        <property name="zkConnection_TimeOut" value="1000"/>
-        <property name="zkSession_TimeOut" value="5000"/>
+        <property name="serializer" value="KRYO"/>
         <property name="timeoutMillis" value="5000"/>
     </bean>
 </beans>

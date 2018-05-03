@@ -38,19 +38,19 @@ public class GungnirServer implements IServer {
         LOGGER.info("GungnirServer Init");
         int cpu = Runtime.getRuntime().availableProcessors();
 
-        defaultGroup = new DefaultEventLoopGroup(8,(r)->{
+        defaultGroup = new DefaultEventLoopGroup(8, (r) -> {
             AtomicInteger integer = new AtomicInteger(0);
-            return new Thread(r,"ServerDefaultGroup" + integer.incrementAndGet());
+            return new Thread(r, "ServerDefaultGroup" + integer.incrementAndGet());
         });
 
-        bossGroup = new NioEventLoopGroup(cpu,(r)->{
+        bossGroup = new NioEventLoopGroup(cpu, (r) -> {
             AtomicInteger integer = new AtomicInteger(0);
-            return new Thread(r,"ServerBossGroup"+integer.incrementAndGet());
+            return new Thread(r, "ServerBossGroup" + integer.incrementAndGet());
         });
 
-        workGroup = new NioEventLoopGroup(cpu,(r)->{
+        workGroup = new NioEventLoopGroup(cpu, (r) -> {
             AtomicInteger integer = new AtomicInteger(0);
-            return new Thread(r,"ServerWorkGroup"+integer.incrementAndGet());
+            return new Thread(r, "ServerWorkGroup" + integer.incrementAndGet());
         });
 
         bootStrap = new ServerBootstrap();
@@ -58,50 +58,43 @@ public class GungnirServer implements IServer {
     }
 
     @Override
-    public void start(String ip,int port, ISerializer serializer) {
+    public void start(String ip, int port, ISerializer serializer) {
         LOGGER.info("GungnirServer start");
-        bootStrap.group(bossGroup,workGroup)
+        bootStrap.group(bossGroup, workGroup)
                 .channel(NioServerSocketChannel.class)
-                .childOption(ChannelOption.SO_KEEPALIVE,true)//连接保活
-//                .option(ChannelOption.TCP_NODELAY,true)//禁用Nagle算法
-                .option(ChannelOption.SO_BACKLOG,1024)//设置队列长度
+                .childOption(ChannelOption.SO_KEEPALIVE, true)//连接保活
+                .option(ChannelOption.TCP_NODELAY,true)//禁用Nagle算法
+                .option(ChannelOption.SO_BACKLOG, 1024)//设置队列长度
                 .childHandler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel ch) throws Exception {
-//                        ch.pipeline()
-//                                .addLast(defaultGroup,
-//                                        new GEncoder(GResponse.class,serializer),
-//                                        new GDecoder(GRequest.class,serializer),
-//                                        new GServerHandler()
-//                                );
-                        ChannelPipeline pipeline = ch.pipeline();
-                        pipeline.addLast(new GEncoder(GResponse.class,serializer));
-                        pipeline.addLast(new GDecoder(GRequest.class,serializer));
-                        pipeline.addLast(new GServerHandler());
+                        ch.pipeline()
+                                .addLast(defaultGroup,
+                                        new GEncoder(GResponse.class, serializer),
+                                        new GDecoder(GRequest.class, serializer),
+                                        new GServerHandler()
+                                );
                     }
-
-
                 });
 
         try {
-            bootStrap.bind(ip,port).sync();
+            bootStrap.bind(ip, port).sync();
 
-            LOGGER.info("GungnirServer start success ,host is :"+ip+",port is:"+port);
+            LOGGER.info("GungnirServer start success ,host is :" + ip + ",port is:" + port);
             //TODO 进行心跳检测Ping与Channel清理工作
 
         } catch (InterruptedException e) {
             e.printStackTrace();
-            LOGGER.error("GungnirServer Start Error:{}",e.getLocalizedMessage());
+            LOGGER.error("GungnirServer Start Error:{}", e.getLocalizedMessage());
         }
-
 
 
     }
 
     @Override
     public void stop() {
-        if (defaultGroup!=null) defaultGroup.shutdownGracefully();
-        if (executorService!=null)executorService.shutdown();
+        if (defaultGroup != null) defaultGroup.shutdownGracefully();
+        if (executorService != null) executorService.shutdown();
 
         bossGroup.shutdownGracefully();
         workGroup.shutdownGracefully();

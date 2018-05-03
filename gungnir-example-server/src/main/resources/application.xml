@@ -12,9 +12,6 @@
     <bean class="io.github.chinalhr.gungnir.netchannel.server.GungnirServerFactory">
         <property name="ip" value="127.0.0.1"/>
         <property name="port" value="8000"/>
-        <property name="serializer" value="PROTOSTUFF"/>
-        <property name="zkAddress" value="127.0.0.1:2181"/>
-        <property name="zkConnection_TimeOut" value="1000"/>
-        <property name="zkSession_TimeOut" value="5000"/>
+        <property name="serializer" value="KRYO"/>
     </bean>
 </beans>

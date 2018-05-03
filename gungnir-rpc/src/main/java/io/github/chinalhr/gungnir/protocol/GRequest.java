@@ -10,6 +10,8 @@ import java.util.Arrays;
  */
 public class GRequest implements Serializable{
 
+    //TODO 增加权重,分离出ProviderService
+
     private static final long serialVersionUID = 1L;
 
     private String requestID;

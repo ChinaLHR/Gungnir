@@ -38,12 +38,14 @@ public class GungnirServerFactory implements ApplicationContextAware,Initializin
     /**
      * config
      */
+
+    //TODO 把zkConfig抽取出来到独立类
     private String ip = "127.0.0.1";//ip地址
     private int port = 8888;//默认Server端口8888
     private ISerializer serializer = SerializeEnum.PROTOSTUFF.serializer;//默认配置Protostuff
-    private String zkAddress = "127.0.0.1:2181";//默认zookeeper配置
-    private int zkSession_TimeOut = 5000;//Zookeeper Session超时
-    private int zkConnection_TimeOut = 1000;//Zookeeper 连接超时
+//    private String zkAddress = "127.0.0.1:2181";//默认zookeeper配置
+//    private int zkSession_TimeOut = 5000;//Zookeeper Session超时
+//    private int zkConnection_TimeOut = 1000;//Zookeeper 连接超时
 
     public void setPort(int port) {
         this.port = port;
@@ -53,17 +55,17 @@ public class GungnirServerFactory implements ApplicationContextAware,Initializin
         this.serializer = SerializeEnum.match(serializer,SerializeEnum.PROTOSTUFF).serializer;
     }
 
-    public void setZkAddress(String zkAddress) {
-        this.zkAddress = zkAddress;
-    }
-
-    public void setZkSession_TimeOut(int zkSession_TimeOut) {
-        this.zkSession_TimeOut = zkSession_TimeOut;
-    }
-
-    public void setZkConnection_TimeOut(int zkConnection_TimeOut) {
-        this.zkConnection_TimeOut = zkConnection_TimeOut;
-    }
+//    public void setZkAddress(String zkAddress) {
+//        this.zkAddress = zkAddress;
+//    }
+//
+//    public void setZkSession_TimeOut(int zkSession_TimeOut) {
+//        this.zkSession_TimeOut = zkSession_TimeOut;
+//    }
+//
+//    public void setZkConnection_TimeOut(int zkConnection_TimeOut) {
+//        this.zkConnection_TimeOut = zkConnection_TimeOut;
+//    }
 
     public void setIp(String ip) {
         this.ip = ip;
@@ -81,17 +83,17 @@ public class GungnirServerFactory implements ApplicationContextAware,Initializin
         return serializer;
     }
 
-    public String getZkAddress() {
-        return zkAddress;
-    }
-
-    public int getZkSession_TimeOut() {
-        return zkSession_TimeOut;
-    }
-
-    public int getZkConnection_TimeOut() {
-        return zkConnection_TimeOut;
-    }
+//    public String getZkAddress() {
+//        return zkAddress;
+//    }
+//
+//    public int getZkSession_TimeOut() {
+//        return zkSession_TimeOut;
+//    }
+//
+//    public int getZkConnection_TimeOut() {
+//        return zkConnection_TimeOut;
+//    }
 
     /**
      * field
@@ -112,7 +114,7 @@ public class GungnirServerFactory implements ApplicationContextAware,Initializin
         server.start(ip,port,serializer);
 
         String serviceAddress = ip+":"+port;
-        serviceRegistry = new ZKServiceRegistry(zkAddress,zkSession_TimeOut,zkConnection_TimeOut);
+        serviceRegistry = new ZKServiceRegistry();
         if (serviceRegistry!=null){
             for (String interfaceName:serviceMap.keySet()){
                 serviceRegistry.register(interfaceName,serviceAddress);
@@ -128,10 +130,12 @@ public class GungnirServerFactory implements ApplicationContextAware,Initializin
      */
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        //TODO 从配置中读取zookeeper进行配置
 
         Map<String, Object> serviceBeanMap = applicationContext.getBeansWithAnnotation(GService.class);
         if(!MapUtils.isEmpty(serviceBeanMap)){
             for (Object serviceBean : serviceBeanMap.values()) {
+                //TODO 进行封装
                 GService annotation = serviceBean.getClass().getAnnotation(GService.class);
                 String serviceName = annotation.value().getName();
                 String version = annotation.version();

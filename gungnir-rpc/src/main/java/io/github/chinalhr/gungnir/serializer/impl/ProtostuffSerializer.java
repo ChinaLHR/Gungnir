@@ -1,9 +1,10 @@
-package io.github.chinalhr.gungnir.serializer;
+package io.github.chinalhr.gungnir.serializer.impl;
 
 import com.dyuproject.protostuff.LinkedBuffer;
 import com.dyuproject.protostuff.ProtostuffIOUtil;
 import com.dyuproject.protostuff.Schema;
 import com.dyuproject.protostuff.runtime.RuntimeSchema;
+import io.github.chinalhr.gungnir.serializer.ISerializer;
 import org.objenesis.Objenesis;
 import org.objenesis.ObjenesisStd;
 
@@ -17,7 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @Date : Create in 22:15 2018/1/5
  * @Email : 13435500980@163.com
  */
-public class ProtostuffSerializer implements ISerializer{
+public class ProtostuffSerializer implements ISerializer {
 
     private static Objenesis objenesis = new ObjenesisStd(true);
     private static Map<Class<?>, Schema<?>> cachedSchema = new ConcurrentHashMap<>();

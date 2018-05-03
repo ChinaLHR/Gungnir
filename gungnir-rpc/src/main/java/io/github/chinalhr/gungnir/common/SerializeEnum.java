@@ -1,8 +1,9 @@
 package io.github.chinalhr.gungnir.common;
 
-import io.github.chinalhr.gungnir.serializer.HessianSerializer;
+import io.github.chinalhr.gungnir.serializer.impl.HessianSerializer;
 import io.github.chinalhr.gungnir.serializer.ISerializer;
-import io.github.chinalhr.gungnir.serializer.ProtostuffSerializer;
+import io.github.chinalhr.gungnir.serializer.impl.KryoSerializer;
+import io.github.chinalhr.gungnir.serializer.impl.ProtostuffSerializer;
 
 /**
  * @Author : ChinaLHR
@@ -14,7 +15,8 @@ import io.github.chinalhr.gungnir.serializer.ProtostuffSerializer;
 public enum SerializeEnum {
 
     HESSIAN(new HessianSerializer()),
-    PROTOSTUFF(new ProtostuffSerializer());
+    PROTOSTUFF(new ProtostuffSerializer()),
+    KRYO(new KryoSerializer());
 
     public final ISerializer serializer;
 

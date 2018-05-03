@@ -3,6 +3,7 @@ package io.github.chinalhr.gungnir.register.zk;
 import io.github.chinalhr.gungnir.common.Constant;
 import io.github.chinalhr.gungnir.register.IServiceDiscovery;
 import io.github.chinalhr.gungnir.utils.CollectionUtil;
+import io.github.chinalhr.gungnir.utils.PropertyConfigeUtils;
 import io.netty.util.internal.ThreadLocalRandom;
 import org.I0Itec.zkclient.ZkClient;
 import org.slf4j.Logger;
@@ -27,10 +28,10 @@ public class ZkServiceDiscovery implements IServiceDiscovery {
 
     private int zkConnection_TimeOut;
 
-    public ZkServiceDiscovery(String address,int zkSession_TimeOut,int zkConnection_TimeOut) {
-        this.address = address;
-        this.zkSession_TimeOut = zkSession_TimeOut;
-        this.zkConnection_TimeOut = zkConnection_TimeOut;
+    public ZkServiceDiscovery() {
+        this.address = PropertyConfigeUtils.getZkAddress();
+        this.zkSession_TimeOut = PropertyConfigeUtils.getZkSession_TimeOut();
+        this.zkConnection_TimeOut = PropertyConfigeUtils.getZkConnection_TimeOut();
     }
 
     @Override

@@ -1,7 +1,4 @@
-package io.github.chinalhr.gungnir.utils;
-
-import io.github.chinalhr.gungnir.protocol.GRequest;
-import io.github.chinalhr.gungnir.protocol.GResponse;
+package io.github.chinalhr.gungnir.protocol;
 
 import java.text.MessageFormat;
 import java.util.concurrent.ConcurrentHashMap;
@@ -14,12 +11,17 @@ import java.util.concurrent.TimeoutException;
  */
 public class RpcCallbackFuture {
 
+    //RequestID——>RpcCallbackFuture
     public static ConcurrentHashMap<String,RpcCallbackFuture> futurePool = new ConcurrentHashMap<>();
 
     private GResponse response;
     private GRequest request;
 
+    /**
+     * 是否已经设置Response
+     */
     private boolean isDone = false;
+
     private Object lock = new Object();
 
     public RpcCallbackFuture(GRequest request) {
@@ -33,7 +35,6 @@ public class RpcCallbackFuture {
 
     public void setResponse(GResponse response) {
         this.response = response;
-        //notify future lock
         synchronized (lock){
             isDone = true;
             lock.notifyAll();

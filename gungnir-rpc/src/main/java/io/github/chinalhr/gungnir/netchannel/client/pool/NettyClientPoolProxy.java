@@ -21,6 +21,8 @@ import org.slf4j.LoggerFactory;
  * @Author : ChinaLHR
  * @Date : Create in 14:46 2018/4/26
  * @Email : 13435500980@163.com
+ *
+ * Netty客户端
  */
 public class NettyClientPoolProxy {
 

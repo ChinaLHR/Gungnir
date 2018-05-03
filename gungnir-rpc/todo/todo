@@ -1,0 +1,17 @@
+//TODO RPC内核
+1.TCP长连接，心跳检测，断线重连
+2.软负载均衡算法实现
+3.增加RPC 序列化协议kryo ——>oj8k
+4.增加Filter
+5.优化apache pool——>oj8k
+6.整合Spring Boot
+7.SPI可扩展机制
+8.javassit字节码技术生成代理
+9.zookeeper优化（服务自动动态发现，服务自动下线）
+10.Listener（服务暴露/销毁时回调）
+11.JMX服务监控
+12.优化Server/Client注册配置
+13.使用异步获取优化Send逻辑
+
+//TODO RPC后台管理
+服务下线，Netty Close，ZKClient删除节点

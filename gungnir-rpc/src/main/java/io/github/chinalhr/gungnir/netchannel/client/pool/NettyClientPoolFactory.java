@@ -9,6 +9,8 @@ import org.apache.commons.pool2.impl.DefaultPooledObject;
  * @Author : ChinaLHR
  * @Date : Create in 15:45 2018/4/26
  * @Email : 13435500980@163.com
+ *
+ * NettyClientPoolProxy对象工厂
  */
 public class NettyClientPoolFactory extends BasePooledObjectFactory<NettyClientPoolProxy> {
 

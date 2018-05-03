@@ -23,7 +23,6 @@ public class GServerHandler extends SimpleChannelInboundHandler<GRequest>{
     protected void channelRead0(ChannelHandlerContext ctx, GRequest request) throws Exception {
 
         GResponse response = InvokeOperation.invokeService(request, null);
-        System.out.println("response=========================>"+response);
         ctx.writeAndFlush(response);
     }
 
