@@ -13,6 +13,8 @@ import org.slf4j.LoggerFactory;
  * @Email : 13435500980@163.com
  *
  * Zookeeper 服务注册实现
+ *
+ * 路径：gungnir/serviceName/address
  */
 public class ZKServiceRegistry implements IServiceRegistry {
 

@@ -26,10 +26,6 @@ public class InvokeOperation {
      */
     private static Map<String, Object> serviceMap = new HashMap<>();
 
-    public static Map<String, Object> getServiceMap() {
-        return serviceMap;
-    }
-
     public static void setServiceMap(Map<String, Object> serviceMap) {
         InvokeOperation.serviceMap = serviceMap;
     }

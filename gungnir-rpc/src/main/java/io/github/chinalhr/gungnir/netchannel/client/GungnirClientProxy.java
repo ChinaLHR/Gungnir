@@ -31,10 +31,8 @@ public class GungnirClientProxy implements FactoryBean<Object>, InitializingBean
     private Class<?> iclass;
     private String version;
     private ISerializer serializer = SerializeEnum.PROTOSTUFF.serializer;//默认配置Protostuff
-//    private String zkAddress = "127.0.0.1:2181";//默认zookeeper配置
-//    private int zkSession_TimeOut = 5000;//Zookeeper Session超时
-//    private int zkConnection_TimeOut = 1000;//Zookeeper 连接超时
     private long timeoutMillis = 5000;//请求超时时间
+    private String groupName = "default";//路由分组名
 
     public void setIclass(Class<?> iclass) {
         this.iclass = iclass;
@@ -48,22 +46,13 @@ public class GungnirClientProxy implements FactoryBean<Object>, InitializingBean
         this.serializer = SerializeEnum.match(serializer, SerializeEnum.PROTOSTUFF).serializer;
     }
 
-//    public void setZkAddress(String zkAddress) {
-//        this.zkAddress = zkAddress;
-//    }
-//
-//    public void setZkSession_TimeOut(int zkSession_TimeOut) {
-//        this.zkSession_TimeOut = zkSession_TimeOut;
-//    }
-//
-//    public void setZkConnection_TimeOut(int zkConnection_TimeOut) {
-//        this.zkConnection_TimeOut = zkConnection_TimeOut;
-//    }
-
     public void setTimeoutMillis(long timeoutMillis) {
         this.timeoutMillis = timeoutMillis;
     }
 
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
 
     /**
      * field
@@ -75,14 +64,12 @@ public class GungnirClientProxy implements FactoryBean<Object>, InitializingBean
     public GungnirClientProxy() {
     }
 
-    public GungnirClientProxy(Class<?> iclass, String version, ISerializer serializer, String zkAddress, int zkSession_TimeOut, int zkConnection_TimeOut, long timeoutMillis) {
+    public GungnirClientProxy(Class<?> iclass, String version, ISerializer serializer, long timeoutMillis,String groupName) {
         this.iclass = iclass;
         this.version = version;
         this.serializer = serializer;
-//        this.zkAddress = zkAddress;
-//        this.zkSession_TimeOut = zkSession_TimeOut;
-//        this.zkConnection_TimeOut = zkConnection_TimeOut;
         this.timeoutMillis = timeoutMillis;
+        this.groupName = groupName;
         try {
             afterPropertiesSet();
         } catch (Exception e) {
@@ -106,6 +93,8 @@ public class GungnirClientProxy implements FactoryBean<Object>, InitializingBean
             request.setMethodName(method.getName());
             request.setParameterTypes(method.getParameterTypes());
             request.setParameters(args);
+            request.setVersion(version);
+            request.setGroupName(groupName);
 
             serviceDiscovery = new ZkServiceDiscovery();
             if (serviceDiscovery != null) {
@@ -130,7 +119,7 @@ public class GungnirClientProxy implements FactoryBean<Object>, InitializingBean
 
             if (response == null) {
                 LOGGER.error("GungnirClientProxy Get GResponse Is Null");
-                throw new Exception("GungnirClientProxy Get GResponse Is Null");
+                throw new GRpcRuntimeException("GungnirClientProxy Get GResponse Is Null");
             }
 
             if (response.getError() != null) {

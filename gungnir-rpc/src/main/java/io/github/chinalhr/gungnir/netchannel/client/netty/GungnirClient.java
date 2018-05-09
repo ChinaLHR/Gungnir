@@ -35,7 +35,6 @@ public class GungnirClient implements IClient{
             clientPoolProxy.send(request);
 
             //获取Response
-            //TODO 修改为异步获取
             return future.get(timeoutMillis);
         }catch (Exception e){
             LOGGER.error("GungnirClient Send Exception：{}",e.getLocalizedMessage());

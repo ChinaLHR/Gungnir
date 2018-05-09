@@ -10,8 +10,6 @@ import java.util.Arrays;
  */
 public class GRequest implements Serializable{
 
-    //TODO 增加权重,分离出ProviderService
-
     private static final long serialVersionUID = 1L;
 
     private String requestID;
@@ -21,6 +19,8 @@ public class GRequest implements Serializable{
     private String className;
 
     private String version;
+
+    private String groupName;
 
     private String methodName;
 
@@ -82,6 +82,14 @@ public class GRequest implements Serializable{
 
     public void setVersion(String version) {
         this.version = version;
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
     }
 
     @Override
