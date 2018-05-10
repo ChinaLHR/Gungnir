@@ -19,8 +19,6 @@ public class ProviderService implements Serializable{
 
     private String groupName;
 
-    private int workerThreads;
-
     private String address;
 
     public String getAddress() {
@@ -61,14 +59,6 @@ public class ProviderService implements Serializable{
 
     public void setGroupName(String groupName) {
         this.groupName = groupName;
-    }
-
-    public int getWorkerThreads() {
-        return workerThreads;
-    }
-
-    public void setWorkerThreads(int workerThreads) {
-        this.workerThreads = workerThreads;
     }
 }
 

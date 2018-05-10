@@ -21,34 +21,39 @@ public interface IRegisterCenter {
     String CONSUMER_TYPE = "consumer";
 
     /**
-     * 进行服务注册
+     * 进行服务提供者注册
      * @param providerServices
      */
     void registerProvider(List<ProviderService> providerServices);
 
     /**
-     * 获取服务提供者Map
+     * 获取服务提供者缓存Map
      * Key:服务提供者接口  value:服务提供者服务方法列表
      * @return
      */
-    Map<String,List<ProviderService>> getProviderServiceMap();
+    Map<String,Map<String,List<ProviderService>>> getProviderServiceMap();
 
     /**
-     * 初始化服务提供者信息
-     * @param groupName
+     * 获取服务消费者缓存Map
+     * Key:服务提供者接口  value:服务消费者服务方法列表
+     * @return
      */
-    void initProviderMap(String groupName);
+    Map<String,Map<String,List<ConsumerService>>> getConsumerServiceMap();
 
     /**
-     * 消费者注册
+     * 从zookeeper中初始化服务提供者信息
+     */
+    void initProviderMap();
+
+    /**
+     * 进行服务消费者注册
      * @param service
      */
     void registerConsumer(ConsumerService service);
 
     /**
-     * 获取服务提供者元信息，自动更新
-     * @return
+     * 从Zookeeper中初始化服务消费者信息
      */
-    Map<String,List<ProviderService>> getServiceMetaDataMap();
+    void initConsumerMap();
 
 }

@@ -14,6 +14,6 @@ public class Client {
         IDataService service = context.getBean(IDataService.class);
         String s = service.helloWorld();
         System.out.println("获取到数据==================>"+s);
-        System.exit(0);
+//        System.exit(0);
     }
 }

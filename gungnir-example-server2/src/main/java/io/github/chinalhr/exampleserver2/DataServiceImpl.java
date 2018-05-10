@@ -10,9 +10,11 @@ import org.springframework.stereotype.Service;
  * @Email : 13435500980@163.com
  */
 
-@GService(value = IDataService.class)
+@GService(value = IDataService.class,
+        version = "1.0.0",
+        groupName = "dev")
 @Service
-public class DataServiceImpl implements IDataService{
+public class DataServiceImpl implements IDataService {
 
     @Override
     public String helloWorld() {

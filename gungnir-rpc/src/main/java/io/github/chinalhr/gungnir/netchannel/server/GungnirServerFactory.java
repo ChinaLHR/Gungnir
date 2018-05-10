@@ -27,10 +27,10 @@ import java.util.Map;
  * @Author : ChinaLHR
  * @Date : Create in 23:24 2018/1/2
  * @Email : 13435500980@163.com
- *
+ * <p>
  * Server配置Bean
  */
-public class GungnirServerFactory implements ApplicationContextAware,InitializingBean,DisposableBean{
+public class GungnirServerFactory implements ApplicationContextAware, InitializingBean, DisposableBean {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GungnirServerFactory.class);
 
@@ -53,7 +53,7 @@ public class GungnirServerFactory implements ApplicationContextAware,Initializin
     }
 
     public void setSerializer(String serializer) {
-        this.serializer = SerializeEnum.match(serializer,SerializeEnum.PROTOSTUFF).serializer;
+        this.serializer = SerializeEnum.match(serializer, SerializeEnum.PROTOSTUFF).serializer;
     }
 
     public void setIp(String ip) {
@@ -81,46 +81,38 @@ public class GungnirServerFactory implements ApplicationContextAware,Initializin
 
     @Override
     public void destroy() throws Exception {
-        if (server!=null)
-        server.stop();
+        if (server != null)
+            server.stop();
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
         server = new GungnirServer();
         server.init();
-        server.start(ip,port,serializer);
+        server.start(ip, port, serializer);
 
-        String serviceAddress = ip+":"+port;
-        serviceRegistry = new ZKServiceRegistry();
-        if (serviceRegistry!=null){
-            for (String interfaceName:serviceMap.keySet()){
-                serviceRegistry.register(interfaceName,serviceAddress);
-                LOGGER.debug("GungnirServerFactory registry service:{} ————> {}",interfaceName,serviceAddress);
-            }
-        }
     }
-
 
 
     /**
      * 在构建Bean的时候对RPCService进行获取,并载入配置
+     *
      * @param applicationContext
      * @throws BeansException
      */
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         Map<String, Object> serviceBeanMap = applicationContext.getBeansWithAnnotation(GService.class);
-        if(!MapUtils.isEmpty(serviceBeanMap)){
+        if (!MapUtils.isEmpty(serviceBeanMap)) {
             for (Object serviceBean : serviceBeanMap.values()) {
                 //build ServiceMap
                 GService annotation = serviceBean.getClass().getAnnotation(GService.class);
                 String serviceName = annotation.value().getName();
                 String version = annotation.version();
-                if (!StringUtils.isEmpty(version)){
-                    serviceName +="-"+version;
+                if (!StringUtils.isEmpty(version)) {
+                    serviceName += "-" + version;
                 }
-                serviceMap.put(serviceName,serviceBean);
+                serviceMap.put(serviceName, serviceBean);
 
                 //build ProviderServices
                 ProviderService providerService = new ProviderService();
@@ -128,14 +120,15 @@ public class GungnirServerFactory implements ApplicationContextAware,Initializin
                 providerService.setWeight(annotation.weight());
                 providerService.setServiceName(serviceName);
                 providerService.setVersion(annotation.version());
-                providerService.setWorkerThreads(annotation.workerThreads());
-
-
+                providerService.setAddress(ip + ":" + port);
+                RegisterCenter center = RegisterCenter.getInstance();
+                providerServices.add(providerService);
+                center.registerProvider(providerServices);
+//                center.initProviderMap();
             }
         }
         InvokeOperation.setServiceMap(serviceMap);
     }
-
 
 
 }

@@ -11,7 +11,31 @@ import java.io.Serializable;
  */
 public class ConsumerService implements Serializable{
 
-//    private Class<?>
-    private String groupName = "default";
+    private String serviceName;
+    private String groupName;
+    private String address;
 
+    public String getServiceName() {
+        return serviceName;
+    }
+
+    public void setServiceName(String serviceName) {
+        this.serviceName = serviceName;
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }

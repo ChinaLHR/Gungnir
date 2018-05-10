@@ -79,9 +79,7 @@ public class GungnirServer implements IServer {
 
         try {
             bootStrap.bind(ip, port).sync();
-
             LOGGER.info("GungnirServer start success ,host is :" + ip + ",port is:" + port);
-            //TODO 进行心跳检测Ping与Channel清理工作
 
         } catch (InterruptedException e) {
             e.printStackTrace();

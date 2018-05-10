@@ -40,10 +40,4 @@ public @interface GService {
      * @return
      */
     String groupName() default "default";
-
-    /**
-     * 服务端线程数 默认10
-     * @return
-     */
-    int workerThreads() default 10;
 }

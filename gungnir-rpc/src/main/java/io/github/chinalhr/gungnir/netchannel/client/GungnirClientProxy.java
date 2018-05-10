@@ -5,7 +5,10 @@ import io.github.chinalhr.gungnir.exception.GRpcRuntimeException;
 import io.github.chinalhr.gungnir.netchannel.client.netty.GungnirClient;
 import io.github.chinalhr.gungnir.protocol.GRequest;
 import io.github.chinalhr.gungnir.protocol.GResponse;
+import io.github.chinalhr.gungnir.protocol.ProviderService;
+import io.github.chinalhr.gungnir.register.IRegisterCenter;
 import io.github.chinalhr.gungnir.register.IServiceDiscovery;
+import io.github.chinalhr.gungnir.register.zk.RegisterCenter;
 import io.github.chinalhr.gungnir.register.zk.ZkServiceDiscovery;
 import io.github.chinalhr.gungnir.serializer.ISerializer;
 import io.github.chinalhr.gungnir.utils.GeneralUtils;
@@ -16,6 +19,8 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Proxy;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Author : ChinaLHR
@@ -58,7 +63,8 @@ public class GungnirClientProxy implements FactoryBean<Object>, InitializingBean
      * field
      */
     private IClient client;
-    private IServiceDiscovery serviceDiscovery;
+//    private IServiceDiscovery serviceDiscovery;
+    private IRegisterCenter registerCenter;
     private String serviceAddress;
 
     public GungnirClientProxy() {
@@ -96,13 +102,20 @@ public class GungnirClientProxy implements FactoryBean<Object>, InitializingBean
             request.setVersion(version);
             request.setGroupName(groupName);
 
-            serviceDiscovery = new ZkServiceDiscovery();
-            if (serviceDiscovery != null) {
+//            serviceDiscovery = new ZkServiceDiscovery();
+            registerCenter = RegisterCenter.getInstance();
+            registerCenter.initProviderMap();
+            if (registerCenter != null) {
                 String serviceName = iclass.getName();
                 if (!StringUtils.isEmpty(version)) {
                     serviceName += "-" + version;
                 }
-                serviceAddress = serviceDiscovery.discover(serviceName);
+//                serviceAddress = serviceDiscovery.discover(serviceName);
+                Map<String, Map<String, List<ProviderService>>> providerServiceMap = registerCenter.getProviderServiceMap();
+                List<ProviderService> providerServices = providerServiceMap.get(groupName).get(serviceName);
+                //TODO 此处进行负载均衡
+                ProviderService providerService = providerServices.get(0);
+                serviceAddress = providerService.getAddress();
                 LOGGER.debug("GungnirClientProxy discover serviceAddress={}", serviceAddress);
             } else {
                 LOGGER.error("GungnirClientProxy serviceDiscovery is null");
