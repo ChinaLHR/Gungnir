@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
  *
  * 路径：gungnir/serviceName/address
  */
+@Deprecated
 public class ZKServiceRegistry implements IServiceRegistry {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ZkServiceDiscovery.class);

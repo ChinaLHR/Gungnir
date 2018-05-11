@@ -7,6 +7,7 @@ package io.github.chinalhr.gungnir.register;
  *
  * 服务注册接口
  */
+@Deprecated
 public interface IServiceRegistry {
 
     void register(String serviceName,String serviceAddress);

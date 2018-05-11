@@ -13,7 +13,7 @@ public class ConsumerService implements Serializable{
 
     private String serviceName;
     private String groupName;
-    private String address;
+    private String ip;
 
     public String getServiceName() {
         return serviceName;
@@ -31,11 +31,11 @@ public class ConsumerService implements Serializable{
         this.groupName = groupName;
     }
 
-    public String getAddress() {
-        return address;
+    public String getIp() {
+        return ip;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 }

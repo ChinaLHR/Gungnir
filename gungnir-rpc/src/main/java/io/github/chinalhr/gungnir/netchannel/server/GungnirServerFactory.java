@@ -103,6 +103,7 @@ public class GungnirServerFactory implements ApplicationContextAware, Initializi
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         Map<String, Object> serviceBeanMap = applicationContext.getBeansWithAnnotation(GService.class);
+        RegisterCenter center = RegisterCenter.getInstance();
         if (!MapUtils.isEmpty(serviceBeanMap)) {
             for (Object serviceBean : serviceBeanMap.values()) {
                 //build ServiceMap
@@ -115,20 +116,28 @@ public class GungnirServerFactory implements ApplicationContextAware, Initializi
                 serviceMap.put(serviceName, serviceBean);
 
                 //build ProviderServices
-                ProviderService providerService = new ProviderService();
-                providerService.setGroupName(annotation.groupName());
-                providerService.setWeight(annotation.weight());
-                providerService.setServiceName(serviceName);
-                providerService.setVersion(annotation.version());
-                providerService.setAddress(ip + ":" + port);
-                RegisterCenter center = RegisterCenter.getInstance();
+                ProviderService providerService = buildProviderService(serviceName, annotation);
                 providerServices.add(providerService);
                 center.registerProvider(providerServices);
-//                center.initProviderMap();
             }
         }
         InvokeOperation.setServiceMap(serviceMap);
     }
 
+    /**
+     * 根据注解源数据于serviceName构建ProviderService
+     * @param serviceName
+     * @param metaDate
+     * @return
+     */
+    private ProviderService buildProviderService(String serviceName,GService metaDate){
+        ProviderService providerService = new ProviderService();
+        providerService.setGroupName(metaDate.groupName());
+        providerService.setWeight(metaDate.weight());
+        providerService.setServiceName(serviceName);
+        providerService.setVersion(metaDate.version());
+        providerService.setAddress(ip + ":" + port);
+        return providerService;
+    }
 
 }

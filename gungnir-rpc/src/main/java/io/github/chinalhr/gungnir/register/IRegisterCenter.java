@@ -47,13 +47,24 @@ public interface IRegisterCenter {
 
     /**
      * 进行服务消费者注册
-     * @param service
+     * @param consumerService
      */
-    void registerConsumer(ConsumerService service);
+    void registerConsumer(ConsumerService consumerService);
 
     /**
      * 从Zookeeper中初始化服务消费者信息
      */
     void initConsumerMap();
 
+    /**
+     * 取消注册服务提供者
+     * @return
+     */
+    boolean unRegisterProvider(String groupName,String serviceName);
+
+    /**
+     * 取消注册服务生产者
+     * @return
+     */
+    boolean unRegisterConsumer(String groupName,String serviceName);
 }

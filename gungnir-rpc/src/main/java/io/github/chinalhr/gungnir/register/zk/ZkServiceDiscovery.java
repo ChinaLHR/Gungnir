@@ -18,6 +18,7 @@ import java.util.List;
  *
  * Zookeeper服务发现实现
  */
+@Deprecated
 public class ZkServiceDiscovery implements IServiceDiscovery {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ZkServiceDiscovery.class);

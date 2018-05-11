@@ -3,6 +3,7 @@ package io.github.chinalhr.gungnir.netchannel.client;
 import io.github.chinalhr.gungnir.common.SerializeEnum;
 import io.github.chinalhr.gungnir.exception.GRpcRuntimeException;
 import io.github.chinalhr.gungnir.netchannel.client.netty.GungnirClient;
+import io.github.chinalhr.gungnir.protocol.ConsumerService;
 import io.github.chinalhr.gungnir.protocol.GRequest;
 import io.github.chinalhr.gungnir.protocol.GResponse;
 import io.github.chinalhr.gungnir.protocol.ProviderService;
@@ -102,8 +103,6 @@ public class GungnirClientProxy implements FactoryBean<Object>, InitializingBean
             request.setVersion(version);
             request.setGroupName(groupName);
 
-//            serviceDiscovery = new ZkServiceDiscovery();
-            registerCenter = RegisterCenter.getInstance();
             registerCenter.initProviderMap();
             if (registerCenter != null) {
                 String serviceName = iclass.getName();
@@ -156,6 +155,19 @@ public class GungnirClientProxy implements FactoryBean<Object>, InitializingBean
 
     @Override
     public void afterPropertiesSet() throws Exception {
+        registerCenter = RegisterCenter.getInstance();
         client = new GungnirClient();
+        //进行消费者注册
+        String serviceName = iclass.getName();
+        if (!StringUtils.isEmpty(version)) {
+            serviceName += "-" + version;
+        }
+
+        ConsumerService consumerService = new ConsumerService();
+        consumerService.setIp(GeneralUtils.getHostAddress());
+        consumerService.setServiceName(serviceName);
+        consumerService.setGroupName(groupName);
+        registerCenter.registerConsumer(consumerService);
     }
+
 }
