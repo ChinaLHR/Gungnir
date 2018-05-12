@@ -12,6 +12,6 @@
     <bean class="io.github.chinalhr.gungnir.netchannel.server.GungnirServerFactory">
         <property name="ip" value="127.0.0.1"/>
         <property name="port" value="8000"/>
-        <property name="serializer" value="KRYO"/>
+        <property name="serializer" value="protostuff"/>
     </bean>
 </beans>

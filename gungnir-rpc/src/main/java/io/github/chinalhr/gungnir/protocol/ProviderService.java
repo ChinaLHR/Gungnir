@@ -60,5 +60,15 @@ public class ProviderService implements Serializable{
     public void setGroupName(String groupName) {
         this.groupName = groupName;
     }
+
+    public ProviderService clone(){
+        ProviderService providerClone = new ProviderService();
+        providerClone.setServiceName(this.serviceName);
+        providerClone.setGroupName(this.groupName);
+        providerClone.setWeight(this.weight);
+        providerClone.setAddress(this.address);
+        providerClone.setVersion(this.version);
+        return providerClone;
+    }
 }
 

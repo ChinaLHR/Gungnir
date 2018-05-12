@@ -11,7 +11,7 @@ import java.util.List;
  *
  * 负载均衡接口
  */
-public interface IBoadBalance {
+public interface ILoadBalance {
 
     /**
      * 服务提供者负载均衡接口

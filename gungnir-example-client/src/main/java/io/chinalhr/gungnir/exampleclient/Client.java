@@ -18,10 +18,12 @@ import java.util.Enumeration;
 public class Client {
     public static void main(String[] args) throws SocketException {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("application.xml");
-        IDataService service = context.getBean(IDataService.class);
-        String s = service.helloWorld();
-        System.out.println("获取到数据==================>"+s);
-        System.exit(0);
+        for (int i = 0; i < 100; i++) {
+            IDataService service = context.getBean(IDataService.class);
+            String s = service.helloWorld();
+            System.out.println("获取到数据==================>"+s);
 
+        }
+        System.exit(0);
     }
 }

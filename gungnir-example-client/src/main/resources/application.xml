@@ -6,9 +6,10 @@
 
     <bean id="IDataServicce" class="io.github.chinalhr.gungnir.netchannel.client.GungnirClientProxy">
         <property name="iclass" value="io.github.chinalhr.api.IDataService" />
-        <property name="serializer" value="KRYO"/>
+        <property name="serializer" value="protostuff"/>
         <property name="timeoutMillis" value="5000"/>
         <property name="version" value="1.0.0"/>
         <property name="groupName" value="dev"/>
+        <property name="loadBalance" value="hash"/>
     </bean>
 </beans>

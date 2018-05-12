@@ -1,16 +1,16 @@
 package io.github.chinalhr.gungnir.netchannel.client;
 
-import io.github.chinalhr.gungnir.common.SerializeEnum;
+import io.github.chinalhr.gungnir.enums.LoadBalanceEnum;
+import io.github.chinalhr.gungnir.enums.SerializeEnum;
 import io.github.chinalhr.gungnir.exception.GRpcRuntimeException;
 import io.github.chinalhr.gungnir.netchannel.client.netty.GungnirClient;
+import io.github.chinalhr.gungnir.netloadbalance.ILoadBalance;
 import io.github.chinalhr.gungnir.protocol.ConsumerService;
 import io.github.chinalhr.gungnir.protocol.GRequest;
 import io.github.chinalhr.gungnir.protocol.GResponse;
 import io.github.chinalhr.gungnir.protocol.ProviderService;
 import io.github.chinalhr.gungnir.register.IRegisterCenter;
-import io.github.chinalhr.gungnir.register.IServiceDiscovery;
 import io.github.chinalhr.gungnir.register.zk.RegisterCenter;
-import io.github.chinalhr.gungnir.register.zk.ZkServiceDiscovery;
 import io.github.chinalhr.gungnir.serializer.ISerializer;
 import io.github.chinalhr.gungnir.utils.GeneralUtils;
 import org.slf4j.Logger;
@@ -36,7 +36,8 @@ public class GungnirClientProxy implements FactoryBean<Object>, InitializingBean
      */
     private Class<?> iclass;
     private String version;
-    private ISerializer serializer = SerializeEnum.PROTOSTUFF.serializer;//默认配置Protostuff
+    private ISerializer serializer = SerializeEnum.protostuff.serializer;//默认配置Protostuff
+    private ILoadBalance loadBalance = LoadBalanceEnum.random.loadBalance;//默认配置随机负载均衡算法
     private long timeoutMillis = 5000;//请求超时时间
     private String groupName = "default";//路由分组名
 
@@ -49,7 +50,11 @@ public class GungnirClientProxy implements FactoryBean<Object>, InitializingBean
     }
 
     public void setSerializer(String serializer) {
-        this.serializer = SerializeEnum.match(serializer, SerializeEnum.PROTOSTUFF).serializer;
+        this.serializer = SerializeEnum.match(serializer, SerializeEnum.protostuff).serializer;
+    }
+
+    public void setLoadBalance(String loadBalance) {
+        this.loadBalance = LoadBalanceEnum.match(loadBalance,LoadBalanceEnum.random).loadBalance;
     }
 
     public void setTimeoutMillis(long timeoutMillis) {
@@ -64,7 +69,6 @@ public class GungnirClientProxy implements FactoryBean<Object>, InitializingBean
      * field
      */
     private IClient client;
-//    private IServiceDiscovery serviceDiscovery;
     private IRegisterCenter registerCenter;
     private String serviceAddress;
 
@@ -109,11 +113,10 @@ public class GungnirClientProxy implements FactoryBean<Object>, InitializingBean
                 if (!StringUtils.isEmpty(version)) {
                     serviceName += "-" + version;
                 }
-//                serviceAddress = serviceDiscovery.discover(serviceName);
                 Map<String, Map<String, List<ProviderService>>> providerServiceMap = registerCenter.getProviderServiceMap();
                 List<ProviderService> providerServices = providerServiceMap.get(groupName).get(serviceName);
-                //TODO 此处进行负载均衡
-                ProviderService providerService = providerServices.get(0);
+
+                ProviderService providerService = loadBalance.selectProviderService(providerServices);
                 serviceAddress = providerService.getAddress();
                 LOGGER.debug("GungnirClientProxy discover serviceAddress={}", serviceAddress);
             } else {

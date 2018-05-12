@@ -1,9 +1,13 @@
-package io.github.chinalhr.gungnir.common;
+package io.github.chinalhr.gungnir.enums;
 
+import io.github.chinalhr.gungnir.serializer.SerializerEngine;
 import io.github.chinalhr.gungnir.serializer.impl.HessianSerializer;
 import io.github.chinalhr.gungnir.serializer.ISerializer;
 import io.github.chinalhr.gungnir.serializer.impl.KryoSerializer;
 import io.github.chinalhr.gungnir.serializer.impl.ProtostuffSerializer;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @Author : ChinaLHR
@@ -14,9 +18,9 @@ import io.github.chinalhr.gungnir.serializer.impl.ProtostuffSerializer;
  */
 public enum SerializeEnum {
 
-    HESSIAN(new HessianSerializer()),
-    PROTOSTUFF(new ProtostuffSerializer()),
-    KRYO(new KryoSerializer());
+    hession(SerializerEngine.getSerializerByName("hessian")),
+    protostuff(SerializerEngine.getSerializerByName("protostuff")),
+    kryo(SerializerEngine.getSerializerByName("kryo"));
 
     public final ISerializer serializer;
 

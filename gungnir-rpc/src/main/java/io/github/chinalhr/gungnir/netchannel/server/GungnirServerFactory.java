@@ -1,11 +1,10 @@
 package io.github.chinalhr.gungnir.netchannel.server;
 
 import io.github.chinalhr.gungnir.annonation.GService;
-import io.github.chinalhr.gungnir.common.SerializeEnum;
+import io.github.chinalhr.gungnir.enums.SerializeEnum;
 import io.github.chinalhr.gungnir.protocol.ProviderService;
 import io.github.chinalhr.gungnir.register.IServiceRegistry;
 import io.github.chinalhr.gungnir.register.zk.RegisterCenter;
-import io.github.chinalhr.gungnir.register.zk.ZKServiceRegistry;
 import io.github.chinalhr.gungnir.serializer.ISerializer;
 import io.github.chinalhr.gungnir.netchannel.server.netty.GungnirServer;
 import org.apache.commons.collections4.MapUtils;
@@ -46,14 +45,14 @@ public class GungnirServerFactory implements ApplicationContextAware, Initializi
      */
     private String ip = "127.0.0.1";//ip地址
     private int port = 8888;//默认Server端口8888
-    private ISerializer serializer = SerializeEnum.PROTOSTUFF.serializer;//默认配置Protostuff
+    private ISerializer serializer = SerializeEnum.protostuff.serializer;//默认配置Protostuff
 
     public void setPort(int port) {
         this.port = port;
     }
 
     public void setSerializer(String serializer) {
-        this.serializer = SerializeEnum.match(serializer, SerializeEnum.PROTOSTUFF).serializer;
+        this.serializer = SerializeEnum.match(serializer, SerializeEnum.protostuff).serializer;
     }
 
     public void setIp(String ip) {

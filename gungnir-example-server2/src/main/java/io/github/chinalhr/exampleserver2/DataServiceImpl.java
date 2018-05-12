@@ -12,7 +12,8 @@ import org.springframework.stereotype.Service;
 
 @GService(value = IDataService.class,
         version = "1.0.0",
-        groupName = "dev")
+        groupName = "dev",
+        weight = 2)
 @Service
 public class DataServiceImpl implements IDataService {
 
