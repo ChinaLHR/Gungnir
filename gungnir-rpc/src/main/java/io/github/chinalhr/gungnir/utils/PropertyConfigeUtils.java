@@ -25,6 +25,7 @@ public class PropertyConfigeUtils {
     private static String zkAddress = "";//默认zookeeper配置
     private static int zkSession_TimeOut;//Zookeeper Session超时
     private static int zkConnection_TimeOut;//Zookeeper 连接超时
+    private static int netChannelSize;//Netty连接数
 
     static {
         InputStream is = null;
@@ -37,6 +38,7 @@ public class PropertyConfigeUtils {
             zkAddress = properties.getProperty("zkAddress","127.0.0.1:2181");
             zkSession_TimeOut = Integer.parseInt(properties.getProperty("zkSession_TimeOut","5000"));
             zkConnection_TimeOut = Integer.parseInt(properties.getProperty("zkConnection_TimeOut","1000"));
+            netChannelSize = Integer.parseInt(properties.getProperty("netChannelSize","10"));
         }catch (Throwable t){
             LOGGER.error("load gungnir.properties failed",t);
             throw new RuntimeException(t);
@@ -62,5 +64,9 @@ public class PropertyConfigeUtils {
 
     public static int getZkConnection_TimeOut() {
         return zkConnection_TimeOut;
+    }
+
+    public static int getNetChannelSize() {
+        return netChannelSize;
     }
 }

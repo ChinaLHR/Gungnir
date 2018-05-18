@@ -1,10 +1,8 @@
 package io.github.chinalhr.gungnir.netchannel.client;
 
-import io.github.chinalhr.gungnir.enums.LoadBalanceEnum;
-import io.github.chinalhr.gungnir.enums.SerializeEnum;
 import io.github.chinalhr.gungnir.exception.GRpcRuntimeException;
-import io.github.chinalhr.gungnir.netchannel.client.netty.GungnirClient;
-import io.github.chinalhr.gungnir.netloadbalance.ILoadBalance;
+import io.github.chinalhr.gungnir.netchannel.client.future.GResponseCallback;
+import io.github.chinalhr.gungnir.netchannel.config.GungnirClientConfig;
 import io.github.chinalhr.gungnir.protocol.ConsumerService;
 import io.github.chinalhr.gungnir.protocol.GRequest;
 import io.github.chinalhr.gungnir.protocol.GResponse;
@@ -12,9 +10,8 @@ import io.github.chinalhr.gungnir.protocol.ProviderService;
 import io.github.chinalhr.gungnir.register.IRegisterCenter;
 import io.github.chinalhr.gungnir.register.zk.RegisterCenter;
 import io.github.chinalhr.gungnir.serializer.ISerializer;
+import io.github.chinalhr.gungnir.threadpool.GungnirClientThreadPoolManager;
 import io.github.chinalhr.gungnir.utils.GeneralUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.StringUtils;
@@ -22,56 +19,21 @@ import org.springframework.util.StringUtils;
 import java.lang.reflect.Proxy;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Author : ChinaLHR
  * @Date : Create in 14:13 2018/4/26
  * @Email : 13435500980@163.com
  */
-public class GungnirClientProxy implements FactoryBean<Object>, InitializingBean {
-    private static final Logger LOGGER = LoggerFactory.getLogger(GungnirClientProxy.class);
+public class GungnirClientProxy extends GungnirClientConfig implements FactoryBean<Object>, InitializingBean {
 
-    /**
-     * config
-     */
-    private Class<?> iclass;
-    private String version;
-    private ISerializer serializer = SerializeEnum.protostuff.serializer;//默认配置Protostuff
-    private ILoadBalance loadBalance = LoadBalanceEnum.random.loadBalance;//默认配置随机负载均衡算法
-    private long timeoutMillis = 5000;//请求超时时间
-    private String groupName = "default";//路由分组名
-
-    public void setIclass(Class<?> iclass) {
-        this.iclass = iclass;
-    }
-
-    public void setVersion(String version) {
-        this.version = version;
-    }
-
-    public void setSerializer(String serializer) {
-        this.serializer = SerializeEnum.match(serializer, SerializeEnum.protostuff).serializer;
-    }
-
-    public void setLoadBalance(String loadBalance) {
-        this.loadBalance = LoadBalanceEnum.match(loadBalance,LoadBalanceEnum.random).loadBalance;
-    }
-
-    public void setTimeoutMillis(long timeoutMillis) {
-        this.timeoutMillis = timeoutMillis;
-    }
-
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
-    }
-
-    /**
-     * field
-     */
     private IClient client;
     private IRegisterCenter registerCenter;
     private String serviceAddress;
-
+    private ExecutorService fixedThreadPool = null;
     public GungnirClientProxy() {
     }
 
@@ -115,7 +77,7 @@ public class GungnirClientProxy implements FactoryBean<Object>, InitializingBean
                 }
                 Map<String, Map<String, List<ProviderService>>> providerServiceMap = registerCenter.getProviderServiceMap();
                 List<ProviderService> providerServices = providerServiceMap.get(groupName).get(serviceName);
-
+                //根据负载均衡策略获取providerService
                 ProviderService providerService = loadBalance.selectProviderService(providerServices);
                 serviceAddress = providerService.getAddress();
                 LOGGER.debug("GungnirClientProxy discover serviceAddress={}", serviceAddress);
@@ -124,13 +86,9 @@ public class GungnirClientProxy implements FactoryBean<Object>, InitializingBean
                 throw new GRpcRuntimeException("GungnirClientProxy serviceDiscovery is empty");
             }
 
-            //获取RPC Server的host:ip
-            String[] split = StringUtils.split(serviceAddress, ":");
-            String host = split[0];
-            int port = Integer.parseInt(split[1]);
-
-            //发送request接受response
-            GResponse response = client.send(host, port, request, serializer, timeoutMillis);
+            ExecutorService fixedThreadPool = GungnirClientThreadPoolManager.getFixedThreadPool();
+            Future<GResponse> future = fixedThreadPool.submit(GResponseCallback.build(serviceAddress, serializer, timeoutMillis, request));
+            GResponse response = future.get(timeoutMillis, TimeUnit.MILLISECONDS);
 
             if (response == null) {
                 LOGGER.error("GungnirClientProxy Get GResponse Is Null");
@@ -159,7 +117,6 @@ public class GungnirClientProxy implements FactoryBean<Object>, InitializingBean
     @Override
     public void afterPropertiesSet() throws Exception {
         registerCenter = RegisterCenter.getInstance();
-        client = new GungnirClient();
         //进行消费者注册
         String serviceName = iclass.getName();
         if (!StringUtils.isEmpty(version)) {

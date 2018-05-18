@@ -17,7 +17,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class PollLoadBalance implements ILoadBalance {
 
-    private volatile int index = 0;
+    private int index = 0;
 
     private Lock lock = new ReentrantLock();
 

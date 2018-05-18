@@ -14,6 +14,8 @@ import java.util.UUID;
  */
 public class GeneralUtils {
 
+    private static int cpu = Runtime.getRuntime().availableProcessors();
+
     /**
      * 获取UUID
      * @return
@@ -47,4 +49,11 @@ public class GeneralUtils {
         return "";
     }
 
+    public static int getThreadConfigNumberOfIO(){
+        return cpu*2+1;
+    }
+
+    public static int getThreadConfigNumberOfCPU(){
+        return cpu+1;
+    }
 }

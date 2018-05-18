@@ -1,5 +1,6 @@
 package io.github.chinalhr.gungnir.netchannel.client.netty;
 
+import io.github.chinalhr.gungnir.netchannel.client.future.GResponseHolder;
 import io.github.chinalhr.gungnir.protocol.GResponse;
 import io.github.chinalhr.gungnir.protocol.RpcCallbackFuture;
 import io.netty.channel.ChannelHandlerContext;
@@ -18,15 +19,17 @@ public class GungnirClientHandler extends SimpleChannelInboundHandler<GResponse>
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, GResponse response) throws Exception {
-        //接收到Response，根据RequestID维护两者在future中的对应关系
-        RpcCallbackFuture future = RpcCallbackFuture.futurePool.get(response.getRequestId());
-        future.setResponse(response);
-        RpcCallbackFuture.futurePool.put(response.getRequestId(), future);
+        GResponseHolder.putGResponse(response);
     }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         LOGGER.error("Gungnir Client Netty caught exception",cause);
         ctx.close();
+    }
+
+    @Override
+    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
+        ctx.flush();
     }
 }

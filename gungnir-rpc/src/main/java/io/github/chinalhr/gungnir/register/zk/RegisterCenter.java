@@ -5,6 +5,8 @@ import io.github.chinalhr.gungnir.exception.GRpcRuntimeException;
 import io.github.chinalhr.gungnir.protocol.ConsumerService;
 import io.github.chinalhr.gungnir.protocol.ProviderService;
 import io.github.chinalhr.gungnir.register.IRegisterCenter;
+import io.github.chinalhr.gungnir.register.RegisterCenterObserver;
+import io.github.chinalhr.gungnir.register.RegisterCenterSubject;
 import io.github.chinalhr.gungnir.utils.CollectionUtil;
 import io.github.chinalhr.gungnir.utils.PropertyConfigeUtils;
 import org.I0Itec.zkclient.ZkClient;
@@ -22,10 +24,10 @@ import java.util.concurrent.ConcurrentHashMap;
  * @Email : 13435500980@163.com
  * <p>
  * zookeeper path:
- * providerPath：gungnir/groupName/serviceName-version/type/address-weight
- * consumerPath：gungnir/groupName/serviceName-version/type/ip
+ * providerPath：/gungnir/groupName/serviceName-version/type/address-weight
+ * consumerPath：/gungnir/groupName/serviceName-version/type/ip
  */
-public class RegisterCenter implements IRegisterCenter {
+public class RegisterCenter extends RegisterCenterSubject implements IRegisterCenter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RegisterCenter.class);
 
@@ -85,7 +87,7 @@ public class RegisterCenter implements IRegisterCenter {
         return consumerServiceMap;
     }
 
-    //TODO 使用Stream代替外循环
+    //TODO 增加监听机制
     @Override
     public void initProviderMap() {
         String registryPath = ROOT_PATH;
@@ -111,6 +113,7 @@ public class RegisterCenter implements IRegisterCenter {
                     //监听注册服务的变化更新本地缓存
                     zkClient.subscribeChildChanges(servicePath, (parentPath, children) -> {
                         RefreshProviderServiceMap(parentPath, children);
+                        notificationUpdateProviderService();
                     });
                 }
             }
@@ -177,7 +180,6 @@ public class RegisterCenter implements IRegisterCenter {
 
     }
 
-    //TODO 取消注册待完成
     @Override
     public boolean unRegisterProvider(String groupName, String serviceName) {
         return false;
@@ -186,6 +188,13 @@ public class RegisterCenter implements IRegisterCenter {
     @Override
     public boolean unRegisterConsumer(String groupName, String serviceName) {
         return false;
+    }
+
+    @Override
+    public void notificationUpdateProviderService() {
+        registerCenterObservers.forEach(observer->{
+            observer.updateProviderService();
+        });
     }
 
 

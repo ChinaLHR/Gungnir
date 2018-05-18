@@ -1,11 +1,9 @@
 package io.github.chinalhr.gungnir.netchannel.server;
 
 import io.github.chinalhr.gungnir.annonation.GService;
-import io.github.chinalhr.gungnir.enums.SerializeEnum;
+import io.github.chinalhr.gungnir.netchannel.config.GungnirServerConfig;
 import io.github.chinalhr.gungnir.protocol.ProviderService;
-import io.github.chinalhr.gungnir.register.IServiceRegistry;
 import io.github.chinalhr.gungnir.register.zk.RegisterCenter;
-import io.github.chinalhr.gungnir.serializer.ISerializer;
 import io.github.chinalhr.gungnir.netchannel.server.netty.GungnirServer;
 import org.apache.commons.collections4.MapUtils;
 import org.slf4j.Logger;
@@ -29,7 +27,7 @@ import java.util.Map;
  * <p>
  * Server配置Bean
  */
-public class GungnirServerFactory implements ApplicationContextAware, InitializingBean, DisposableBean {
+public class GungnirServerFactory extends GungnirServerConfig implements ApplicationContextAware, InitializingBean, DisposableBean {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GungnirServerFactory.class);
 
@@ -39,44 +37,10 @@ public class GungnirServerFactory implements ApplicationContextAware, Initializi
     private static Map<String, Object> serviceMap = new HashMap<>();
 
     private static List<ProviderService> providerServices = new ArrayList<>();
-
-    /**
-     * config
-     */
-    private String ip = "127.0.0.1";//ip地址
-    private int port = 8888;//默认Server端口8888
-    private ISerializer serializer = SerializeEnum.protostuff.serializer;//默认配置Protostuff
-
-    public void setPort(int port) {
-        this.port = port;
-    }
-
-    public void setSerializer(String serializer) {
-        this.serializer = SerializeEnum.match(serializer, SerializeEnum.protostuff).serializer;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
-
-    public String getIp() {
-        return ip;
-    }
-
-    public int getPort() {
-        return port;
-    }
-
-    public ISerializer getSerializer() {
-        return serializer;
-    }
-
-
     /**
      * field
      */
     private IServer server;
-    private IServiceRegistry serviceRegistry;
 
     @Override
     public void destroy() throws Exception {
@@ -88,7 +52,7 @@ public class GungnirServerFactory implements ApplicationContextAware, Initializi
     public void afterPropertiesSet() throws Exception {
         server = new GungnirServer();
         server.init();
-        server.start(ip, port, serializer);
+        server.start(getIp(), getPort(), getSerializer());
 
     }
 
@@ -135,7 +99,7 @@ public class GungnirServerFactory implements ApplicationContextAware, Initializi
         providerService.setWeight(metaDate.weight());
         providerService.setServiceName(serviceName);
         providerService.setVersion(metaDate.version());
-        providerService.setAddress(ip + ":" + port);
+        providerService.setAddress(getIp() + ":" + getPort());
         return providerService;
     }
 

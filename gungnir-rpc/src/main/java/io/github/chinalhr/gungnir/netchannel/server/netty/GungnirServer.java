@@ -7,6 +7,7 @@ import io.github.chinalhr.gungnir.serializer.ISerializer;
 import io.github.chinalhr.gungnir.netchannel.server.IServer;
 import io.github.chinalhr.gungnir.serializer.netty.GDecoder;
 import io.github.chinalhr.gungnir.serializer.netty.GEncoder;
+import io.github.chinalhr.gungnir.utils.GeneralUtils;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -36,19 +37,18 @@ public class GungnirServer implements IServer {
     @Override
     public void init() {
         LOGGER.info("GungnirServer Init");
-        int cpu = Runtime.getRuntime().availableProcessors();
 
         defaultGroup = new DefaultEventLoopGroup(8, (r) -> {
             AtomicInteger integer = new AtomicInteger(0);
             return new Thread(r, "ServerDefaultGroup" + integer.incrementAndGet());
         });
 
-        bossGroup = new NioEventLoopGroup(cpu, (r) -> {
+        bossGroup = new NioEventLoopGroup(GeneralUtils.getThreadConfigNumberOfIO(), (r) -> {
             AtomicInteger integer = new AtomicInteger(0);
             return new Thread(r, "ServerBossGroup" + integer.incrementAndGet());
         });
 
-        workGroup = new NioEventLoopGroup(cpu, (r) -> {
+        workGroup = new NioEventLoopGroup(GeneralUtils.getThreadConfigNumberOfIO(), (r) -> {
             AtomicInteger integer = new AtomicInteger(0);
             return new Thread(r, "ServerWorkGroup" + integer.incrementAndGet());
         });
