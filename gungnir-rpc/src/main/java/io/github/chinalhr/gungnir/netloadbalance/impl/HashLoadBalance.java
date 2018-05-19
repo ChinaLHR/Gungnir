@@ -7,6 +7,8 @@ import io.github.chinalhr.gungnir.utils.GeneralUtils;
 
 import java.net.SocketException;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @Author : ChinaLHR
@@ -16,16 +18,24 @@ import java.util.List;
  * 软负载均衡：一致性hash算法(利用调用方IP hash值与服务列表大小取模获得服务索引值)
  */
 public class HashLoadBalance implements ILoadBalance {
+
+    //IP——Hash缓存
+    private Map<String,Integer> hashMap = new ConcurrentHashMap<>();
+
     @Override
     public ProviderService selectProviderService(List<ProviderService> providerServiceList) {
         try {
-            String ip = GeneralUtils.getHostAddress();
-            int hashCode = ip.hashCode();
-
             int size = providerServiceList.size();
-            return providerServiceList.get(hashCode % size);
+            String ip = GeneralUtils.getHostAddress();
+            if (null!=hashMap.get(ip)) {
+                return providerServiceList.get(hashMap.get(ip) % size);
+            }else {
+                Integer hashCode = ip.hashCode();
+                hashMap.put(ip,hashCode);
+                return providerServiceList.get(hashCode % size);
+            }
         } catch (SocketException e) {
-            throw new GRpcLoadBalanceException("LoadBalance get HostAddress Error");
+            throw new GRpcLoadBalanceException("HashLoadBalance get HostAddress Error");
         }
     }
 }

@@ -1,12 +1,10 @@
 package io.github.chinalhr.gungnir.register.zk;
 
-import io.github.chinalhr.gungnir.common.Constant;
 import io.github.chinalhr.gungnir.exception.GRpcRuntimeException;
 import io.github.chinalhr.gungnir.protocol.ConsumerService;
 import io.github.chinalhr.gungnir.protocol.ProviderService;
 import io.github.chinalhr.gungnir.register.IRegisterCenter;
 import io.github.chinalhr.gungnir.register.RegisterCenterObserver;
-import io.github.chinalhr.gungnir.register.RegisterCenterSubject;
 import io.github.chinalhr.gungnir.utils.CollectionUtil;
 import io.github.chinalhr.gungnir.utils.PropertyConfigeUtils;
 import org.I0Itec.zkclient.ZkClient;
@@ -27,7 +25,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * providerPath：/gungnir/groupName/serviceName-version/type/address-weight
  * consumerPath：/gungnir/groupName/serviceName-version/type/ip
  */
-public class RegisterCenter extends RegisterCenterSubject implements IRegisterCenter {
+public class RegisterCenter implements IRegisterCenter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RegisterCenter.class);
 
@@ -43,6 +41,10 @@ public class RegisterCenter extends RegisterCenterSubject implements IRegisterCe
      */
     private Map<String, Map<String, List<ConsumerService>>> consumerServiceMap = new ConcurrentHashMap<>();
 
+    /**
+     * 观察者Map groupName-List<RegisterCenterObserver>
+     */
+    protected Map<String,List<RegisterCenterObserver>> registerCenterObserverMap = new ConcurrentHashMap<>();
     private String address;
     private int zkSession_TimeOut;
     private int zkConnection_TimeOut;
@@ -113,7 +115,7 @@ public class RegisterCenter extends RegisterCenterSubject implements IRegisterCe
                     //监听注册服务的变化更新本地缓存
                     zkClient.subscribeChildChanges(servicePath, (parentPath, children) -> {
                         RefreshProviderServiceMap(parentPath, children);
-                        notificationUpdateProviderService();
+                        notificationObserver(servicePath);
                     });
                 }
             }
@@ -191,12 +193,41 @@ public class RegisterCenter extends RegisterCenterSubject implements IRegisterCe
     }
 
     @Override
-    public void notificationUpdateProviderService() {
-        registerCenterObservers.forEach(observer->{
-            observer.updateProviderService();
-        });
+    public void attach(String groupName, RegisterCenterObserver observer) {
+        if (null==observer) throw new GRpcRuntimeException("RegisterCenterSubject attach error : RegisterCenterObserver is null");
+        if (null==registerCenterObserverMap.get(groupName)){
+            List<RegisterCenterObserver> observers = new ArrayList<>();
+            observers.add(observer);
+            registerCenterObserverMap.put(groupName,observers);
+        }else {
+            if (!registerCenterObserverMap.get(groupName).contains(observer))
+                registerCenterObserverMap.get(groupName).add(observer);
+        }
     }
 
+    @Override
+    public void detach(String groupName, RegisterCenterObserver observer) {
+        if (observer==null) throw new GRpcRuntimeException("RegisterCenterSubject detach error : RegisterCenterObserver is null");
+        if (null==registerCenterObserverMap.get(groupName))
+            throw new GRpcRuntimeException("RegisterCenterSubject detach error : RegisterCenterObserver Is Not attach");
+        else
+            registerCenterObserverMap.get(groupName).remove(observer);
+    }
+
+    @Override
+    public void notificationObserver(String parentPath) {
+        String[] paths = parentPath.split("/");
+        if (paths[4].equals(PROVIDER_TYPE)) {
+            String groupName = paths[2];
+            registerCenterObserverMap.forEach((gName, observers) -> {
+                if (gName.equals(groupName)) {
+                    observers.forEach(observer -> {
+                        observer.updateProviderService();
+                    });
+                }
+            });
+        }
+    }
 
     /**
      * singleton

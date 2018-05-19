@@ -27,6 +27,5 @@ public class Client {
         }
         long endTime=System.currentTimeMillis(); //获取结束时间
         System.out.println("程序运行时间： "+(endTime-startTime)+"ms");
-        System.exit(0);
     }
 }

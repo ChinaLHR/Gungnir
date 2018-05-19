@@ -2,16 +2,19 @@ package io.github.chinalhr.gungnir.netchannel.client;
 
 import io.github.chinalhr.gungnir.exception.GRpcRuntimeException;
 import io.github.chinalhr.gungnir.netchannel.client.future.GResponseCallback;
+import io.github.chinalhr.gungnir.netchannel.client.pool.NettyChannelPoolFactory;
 import io.github.chinalhr.gungnir.netchannel.config.GungnirClientConfig;
 import io.github.chinalhr.gungnir.protocol.ConsumerService;
 import io.github.chinalhr.gungnir.protocol.GRequest;
 import io.github.chinalhr.gungnir.protocol.GResponse;
 import io.github.chinalhr.gungnir.protocol.ProviderService;
 import io.github.chinalhr.gungnir.register.IRegisterCenter;
+import io.github.chinalhr.gungnir.register.RegisterCenterObserver;
 import io.github.chinalhr.gungnir.register.zk.RegisterCenter;
 import io.github.chinalhr.gungnir.serializer.ISerializer;
 import io.github.chinalhr.gungnir.threadpool.GungnirClientThreadPoolManager;
 import io.github.chinalhr.gungnir.utils.GeneralUtils;
+import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.util.StringUtils;
@@ -28,12 +31,11 @@ import java.util.concurrent.TimeUnit;
  * @Date : Create in 14:13 2018/4/26
  * @Email : 13435500980@163.com
  */
-public class GungnirClientProxy extends GungnirClientConfig implements FactoryBean<Object>, InitializingBean {
+public class GungnirClientProxy extends GungnirClientConfig implements FactoryBean<Object>, InitializingBean,DisposableBean {
 
-    private IClient client;
     private IRegisterCenter registerCenter;
     private String serviceAddress;
-    private ExecutorService fixedThreadPool = null;
+    private RegisterObserver observer = new RegisterObserver();
     public GungnirClientProxy() {
     }
 
@@ -69,7 +71,6 @@ public class GungnirClientProxy extends GungnirClientConfig implements FactoryBe
             request.setVersion(version);
             request.setGroupName(groupName);
 
-            registerCenter.initProviderMap();
             if (registerCenter != null) {
                 String serviceName = iclass.getName();
                 if (!StringUtils.isEmpty(version)) {
@@ -117,6 +118,9 @@ public class GungnirClientProxy extends GungnirClientConfig implements FactoryBe
     @Override
     public void afterPropertiesSet() throws Exception {
         registerCenter = RegisterCenter.getInstance();
+        registerCenter.initProviderMap();
+
+        registerCenter.attach(groupName,observer);
         //进行消费者注册
         String serviceName = iclass.getName();
         if (!StringUtils.isEmpty(version)) {
@@ -130,4 +134,17 @@ public class GungnirClientProxy extends GungnirClientConfig implements FactoryBe
         registerCenter.registerConsumer(consumerService);
     }
 
+    @Override
+    public void destroy() throws Exception {
+        registerCenter.detach(groupName,observer);
+    }
+
+    class RegisterObserver implements RegisterCenterObserver{
+
+        @Override
+        public void updateProviderService() {
+            NettyChannelPoolFactory.getInstance().cleanChannelPoolMap();
+        }
+    }
 }
+

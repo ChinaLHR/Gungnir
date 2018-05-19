@@ -57,14 +57,34 @@ public interface IRegisterCenter {
     void initConsumerMap();
 
     /**
-     * 取消注册服务提供者
+     * TODO 取消注册服务提供者
      * @return
      */
     boolean unRegisterProvider(String groupName,String serviceName);
 
     /**
-     * 取消注册服务生产者
+     * TODO 取消注册服务生产者
      * @return
      */
     boolean unRegisterConsumer(String groupName,String serviceName);
+
+    /**
+     * 注册中心Subject：注册
+     * @param groupName
+     * @param observer
+     */
+    void attach(String groupName,RegisterCenterObserver observer);
+
+    /**
+     * 注册中心Subject：注销
+     * @param groupName
+     * @param observer
+     */
+    void detach(String groupName,RegisterCenterObserver observer);
+
+    /**
+     * 注册中心Subject：通知
+     * @param parentPath
+     */
+    void notificationObserver(String parentPath);
 }

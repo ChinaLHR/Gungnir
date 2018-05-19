@@ -20,9 +20,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
@@ -44,8 +41,6 @@ public class NettyChannelPoolFactory {
     private static final Map<String, Map<ISerializer, ArrayBlockingQueue<Channel>>> channelPoolMap = new ConcurrentHashMap<>();
 
     private static final int netChannelSize = PropertyConfigeUtils.getNetChannelSize();
-
-//    private RegisterCenter registerCenter = RegisterCenter.getInstance();
 
     /**
      * 根据address获取Netty Channel阻塞队列
@@ -174,6 +169,13 @@ public class NettyChannelPoolFactory {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**
+     * 当zookeeper节点相应的Group发生变化时，清除ChannelPool缓存
+     */
+    public void cleanChannelPoolMap(){
+        channelPoolMap.clear();
     }
 
     /**

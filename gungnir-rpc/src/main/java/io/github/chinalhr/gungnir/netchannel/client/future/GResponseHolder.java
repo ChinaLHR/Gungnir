@@ -10,6 +10,8 @@ import java.util.concurrent.TimeUnit;
  * @Author : ChinaLHR
  * @Date : Create in 17:34 2018/5/18
  * @Email : 13435500980@163.com
+ *
+ * 异步返回容器
  */
 public class GResponseHolder {
 
