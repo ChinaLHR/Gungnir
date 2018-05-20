@@ -3,10 +3,13 @@ package io.github.chinalhr.gungnir.netchannel.server.netty;
 import io.github.chinalhr.gungnir.protocol.GRequest;
 import io.github.chinalhr.gungnir.protocol.GResponse;
 import io.github.chinalhr.gungnir.netchannel.server.InvokeOperation;
+import io.github.chinalhr.gungnir.threadpool.GungnirServerThreadPoolManager;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.concurrent.ExecutorService;
 
 /**
  * @Author : ChinaLHR
@@ -21,9 +24,11 @@ public class GServerHandler extends SimpleChannelInboundHandler<GRequest>{
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, GRequest request) throws Exception {
-
-        GResponse response = InvokeOperation.invokeService(request, null);
-        ctx.writeAndFlush(response);
+        ExecutorService handlerThreadPool = GungnirServerThreadPoolManager.getHandlerThreadPool();
+        handlerThreadPool.execute(()->{
+            GResponse response = InvokeOperation.invokeService(request, null);
+            ctx.writeAndFlush(response);
+        });
     }
 
     @Override

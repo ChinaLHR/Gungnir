@@ -87,7 +87,7 @@ public class GungnirClientProxy extends GungnirClientConfig implements FactoryBe
                 throw new GRpcRuntimeException("GungnirClientProxy serviceDiscovery is empty");
             }
 
-            ExecutorService fixedThreadPool = GungnirClientThreadPoolManager.getFixedThreadPool();
+            ExecutorService fixedThreadPool = GungnirClientThreadPoolManager.getResponseCallThreadPool();
             Future<GResponse> future = fixedThreadPool.submit(GResponseCallback.build(serviceAddress, serializer, timeoutMillis, request));
             GResponse response = future.get(timeoutMillis, TimeUnit.MILLISECONDS);
 

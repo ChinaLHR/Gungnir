@@ -8,6 +8,8 @@ TCP长连接，心跳检测，断线重连
 zookeeper优化——>oj8k
 Listener（服务暴露/销毁时回调）
 使用异步获取优化Send逻辑——>oj8k
+增加熔断机制
+Gungnir Server Handler业务线程池——>oj8k
 
 //TODO RPC后台管理
 服务下线，Netty Close，ZKClient删除节点
@@ -15,7 +17,7 @@ QPS，TPS检测
 
 //TODO 服务治理
 JMX服务监控
-服务分组路由
+服务分组路由——>oj8k
 服务依赖关系分析
 服务调用链路跟踪
 

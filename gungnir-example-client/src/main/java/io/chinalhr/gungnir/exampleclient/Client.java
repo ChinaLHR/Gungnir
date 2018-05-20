@@ -16,14 +16,13 @@ import java.util.Enumeration;
  * @Email : 13435500980@163.com
  */
 public class Client {
-    public static void main(String[] args) throws SocketException {
+    public static void main(String[] args) throws SocketException, InterruptedException {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("application.xml");
         long startTime=System.currentTimeMillis();
-        for (int i = 0; i < 500; i++) {
+        for (int i = 0; i < 2000; i++) {
             IDataService service = context.getBean(IDataService.class);
             String s = service.helloWorld();
             System.out.println("获取到数据==================>"+s);
-
         }
         long endTime=System.currentTimeMillis(); //获取结束时间
         System.out.println("程序运行时间： "+(endTime-startTime)+"ms");
