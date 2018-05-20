@@ -139,6 +139,9 @@ public class GungnirClientProxy extends GungnirClientConfig implements FactoryBe
         registerCenter.detach(groupName,observer);
     }
 
+    /**
+     * 注册中心观察者
+     */
     class RegisterObserver implements RegisterCenterObserver{
 
         @Override

@@ -16,6 +16,8 @@ public class GeneralUtils {
 
     private static int cpu = Runtime.getRuntime().availableProcessors();
 
+    private static String cacheIp;
+
     /**
      * 获取UUID
      * @return
@@ -30,23 +32,28 @@ public class GeneralUtils {
      * @throws SocketException
      */
     public static String getHostAddress() throws SocketException {
-        Enumeration allNetInterfaces = NetworkInterface.getNetworkInterfaces();
-        InetAddress ip = null;
+        if (null!=cacheIp){
+            return cacheIp;
+        }else {
+            Enumeration allNetInterfaces = NetworkInterface.getNetworkInterfaces();
+            InetAddress ip = null;
 
-        while (allNetInterfaces.hasMoreElements())
-        {
-            NetworkInterface netInterface = (NetworkInterface) allNetInterfaces.nextElement();
-            Enumeration addresses = netInterface.getInetAddresses();
-            while (addresses.hasMoreElements())
+            while (allNetInterfaces.hasMoreElements())
             {
-                ip = (InetAddress) addresses.nextElement();
-                if (ip != null && ip instanceof Inet4Address)
+                NetworkInterface netInterface = (NetworkInterface) allNetInterfaces.nextElement();
+                Enumeration addresses = netInterface.getInetAddresses();
+                while (addresses.hasMoreElements())
                 {
-                   return ip.getHostAddress();
+                    ip = (InetAddress) addresses.nextElement();
+                    if (ip != null && ip instanceof Inet4Address)
+                    {
+                        cacheIp = ip.getHostAddress();
+                        return ip.getHostAddress();
+                    }
                 }
             }
+            return "";
         }
-        return "";
     }
 
     public static int getThreadConfigNumberOfIO(){

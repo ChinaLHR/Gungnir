@@ -19,23 +19,18 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class HashLoadBalance implements ILoadBalance {
 
-    //IP——Hash缓存
-    private Map<String,Integer> hashMap = new ConcurrentHashMap<>();
 
     @Override
     public ProviderService selectProviderService(List<ProviderService> providerServiceList) {
         try {
             int size = providerServiceList.size();
             String ip = GeneralUtils.getHostAddress();
-            if (null!=hashMap.get(ip)) {
-                return providerServiceList.get(hashMap.get(ip) % size);
-            }else {
-                Integer hashCode = ip.hashCode();
-                hashMap.put(ip,hashCode);
-                return providerServiceList.get(hashCode % size);
-            }
+            Integer hashCode = ip.hashCode();
+            ProviderService service = providerServiceList.get(hashCode % size);
+            return service;
         } catch (SocketException e) {
             throw new GRpcLoadBalanceException("HashLoadBalance get HostAddress Error");
         }
     }
+
 }
