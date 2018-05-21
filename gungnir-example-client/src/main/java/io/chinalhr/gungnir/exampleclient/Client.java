@@ -19,7 +19,15 @@ public class Client {
     public static void main(String[] args) throws SocketException, InterruptedException {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("application.xml");
         long startTime=System.currentTimeMillis();
-        for (int i = 0; i < 2000; i++) {
+        for (int i = 0; i < 500; i++) {
+            IDataService service = context.getBean(IDataService.class);
+            String s = service.helloWorld();
+            System.out.println("获取到数据==================>"+s);
+        }
+
+        Thread.sleep(15000);
+
+        for (int i = 0; i < 500; i++) {
             IDataService service = context.getBean(IDataService.class);
             String s = service.helloWorld();
             System.out.println("获取到数据==================>"+s);

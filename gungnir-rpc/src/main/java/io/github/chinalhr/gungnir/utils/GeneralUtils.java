@@ -63,4 +63,6 @@ public class GeneralUtils {
     public static int getThreadConfigNumberOfCPU(){
         return cpu+1;
     }
+
+
 }

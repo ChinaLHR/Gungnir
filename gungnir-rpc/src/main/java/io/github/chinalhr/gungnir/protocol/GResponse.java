@@ -17,6 +17,8 @@ public class GResponse implements Serializable{
 
     private Object result;
 
+    private GRpcHeartbeat heartbeat;
+
     public String getRequestId() {
         return requestID;
     }
@@ -39,6 +41,14 @@ public class GResponse implements Serializable{
 
     public void setResult(Object result) {
         this.result = result;
+    }
+
+    public GRpcHeartbeat getHeartbeat() {
+        return heartbeat;
+    }
+
+    public void setHeartbeat(GRpcHeartbeat heartbeat) {
+        this.heartbeat = heartbeat;
     }
 
     @Override

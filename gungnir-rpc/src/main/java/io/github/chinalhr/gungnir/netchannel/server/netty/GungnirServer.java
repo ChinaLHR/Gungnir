@@ -1,5 +1,6 @@
 package io.github.chinalhr.gungnir.netchannel.server.netty;
 
+import io.github.chinalhr.gungnir.netchannel.keepalive.ServerHearBeatHandler;
 import io.github.chinalhr.gungnir.protocol.GRequest;
 import io.github.chinalhr.gungnir.protocol.GResponse;
 import io.github.chinalhr.gungnir.serializer.ISerializer;
@@ -13,6 +14,7 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.timeout.IdleStateHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -72,6 +74,8 @@ public class GungnirServer implements IServer {
                                 .addLast(defaultGroup,
                                         new GEncoder(GResponse.class, serializer),
                                         new GDecoder(GRequest.class, serializer),
+                                        new IdleStateHandler(10,0,0),
+                                        new ServerHearBeatHandler(),
                                         new GServerHandler()
                                 );
                     }

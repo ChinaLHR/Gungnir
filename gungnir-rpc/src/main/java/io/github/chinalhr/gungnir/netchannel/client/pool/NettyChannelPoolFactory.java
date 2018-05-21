@@ -2,6 +2,7 @@ package io.github.chinalhr.gungnir.netchannel.client.pool;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import io.github.chinalhr.gungnir.netchannel.client.netty.GungnirClientHandler;
+import io.github.chinalhr.gungnir.netchannel.keepalive.ClientHearBeatHandler;
 import io.github.chinalhr.gungnir.protocol.GRequest;
 import io.github.chinalhr.gungnir.protocol.GResponse;
 import io.github.chinalhr.gungnir.protocol.ProviderService;
@@ -16,6 +17,7 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.timeout.IdleStateHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
@@ -84,6 +86,7 @@ public class NettyChannelPoolFactory {
         try {
             channel = queue.poll(timeoutMillis, TimeUnit.MILLISECONDS);
             if (!channel.isOpen() || !channel.isActive() || !channel.isWritable()) {
+                LOGGER.debug("NettyChannelPoolFactory getChannelByPool Channel Failure");
                 channel = getNetChannel(address, serializer);
             }
         } catch (InterruptedException e) {
@@ -136,6 +139,8 @@ public class NettyChannelPoolFactory {
                             ChannelPipeline pipeline = ch.pipeline();
                             pipeline.addLast(new GEncoder(GRequest.class, serializer));
                             pipeline.addLast(new GDecoder(GResponse.class, serializer));
+                            pipeline.addLast(new IdleStateHandler(0,0,5));
+                            pipeline.addLast(new ClientHearBeatHandler());
                             pipeline.addLast(new GungnirClientHandler());
                         }
                     })

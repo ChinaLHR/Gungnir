@@ -10,6 +10,8 @@ import java.util.Arrays;
  */
 public class GRequest implements Serializable{
 
+    private GRpcHeartbeat heartbeat;
+
     private static final long serialVersionUID = 1L;
 
     private String requestID;
@@ -90,6 +92,14 @@ public class GRequest implements Serializable{
 
     public void setGroupName(String groupName) {
         this.groupName = groupName;
+    }
+
+    public GRpcHeartbeat getHeartbeat() {
+        return heartbeat;
+    }
+
+    public void setHeartbeat(GRpcHeartbeat heartbeat) {
+        this.heartbeat = heartbeat;
     }
 
     @Override

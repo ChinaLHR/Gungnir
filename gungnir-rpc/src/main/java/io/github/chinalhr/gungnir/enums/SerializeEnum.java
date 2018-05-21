@@ -14,7 +14,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * @Date : Create in 21:49 2018/1/5
  * @Email : 13435500980@163.com
  *
- * 序列化方案
  */
 public enum SerializeEnum {
 
@@ -24,7 +23,7 @@ public enum SerializeEnum {
 
     public final ISerializer serializer;
 
-    private SerializeEnum(ISerializer serializer) {
+    SerializeEnum(ISerializer serializer) {
         this.serializer = serializer;
     }
 
