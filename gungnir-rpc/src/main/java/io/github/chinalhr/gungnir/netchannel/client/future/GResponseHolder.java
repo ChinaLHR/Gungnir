@@ -1,10 +1,11 @@
 package io.github.chinalhr.gungnir.netchannel.client.future;
 
 import io.github.chinalhr.gungnir.protocol.GResponse;
+import io.github.chinalhr.gungnir.utils.GeneralUtils;
+import sun.misc.ThreadGroupUtils;
 
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * @Author : ChinaLHR
@@ -16,9 +17,8 @@ import java.util.concurrent.TimeUnit;
 public class GResponseHolder {
 
     //Map requestID——ResponseWrapper
-    private static final Map<String,GResponseWrapper> responseMap = new ConcurrentHashMap<>();
+    public static final Map<String,GResponseWrapper> responseMap = new ConcurrentHashMap<>();
 
-    //TODO 加入定期清理功能
 
 
     /**

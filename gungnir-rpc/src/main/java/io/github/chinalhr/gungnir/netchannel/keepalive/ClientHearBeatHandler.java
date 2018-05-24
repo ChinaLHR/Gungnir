@@ -4,12 +4,17 @@ import io.github.chinalhr.gungnir.enums.HearbeatEnum;
 import io.github.chinalhr.gungnir.protocol.GRequest;
 import io.github.chinalhr.gungnir.protocol.GResponse;
 import io.github.chinalhr.gungnir.protocol.GRpcHeartbeat;
+import io.github.chinalhr.gungnir.utils.GeneralUtils;
 import io.github.chinalhr.gungnir.utils.TimeStampUtils;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.timeout.IdleStateEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Author : ChinaLHR
@@ -39,7 +44,7 @@ public class ClientHearBeatHandler extends ChannelInboundHandlerAdapter {
         }
 
         if (response.getHeartbeat().getType()== HearbeatEnum.PONG.getType()){
-            LOGGER.info("ClientHearBeatHandler channelRead ,PONG data is:{}",TimeStampUtils.stampToDate(response.getHeartbeat().getTimeStamp(),"yyyy-MM-dd-HH-mm:ss:ms"));
+            LOGGER.info("ClientHearBeatHandler channelRead ,PONG data is:{}",TimeStampUtils.stampWithMSToDate(response.getHeartbeat().getTimeStamp(),"yyyy-MM-dd HH:mm:ss:ms"));
         }else {
             ctx.fireChannelRead(msg);
         }
@@ -92,7 +97,6 @@ public class ClientHearBeatHandler extends ChannelInboundHandlerAdapter {
         heartbeat.setType(HearbeatEnum.PING.getType());
         heartbeat.setTimeStamp(TimeStampUtils.getUnixTimeStampWithMS());
         request.setHeartbeat(heartbeat);
-
         ctx.writeAndFlush(request);
     }
 

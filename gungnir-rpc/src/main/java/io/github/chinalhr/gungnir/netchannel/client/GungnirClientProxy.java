@@ -2,6 +2,7 @@ package io.github.chinalhr.gungnir.netchannel.client;
 
 import io.github.chinalhr.gungnir.exception.GRpcRuntimeException;
 import io.github.chinalhr.gungnir.netchannel.client.future.GResponseCallback;
+import io.github.chinalhr.gungnir.netchannel.client.future.GResponseHolder;
 import io.github.chinalhr.gungnir.netchannel.client.pool.NettyChannelPoolFactory;
 import io.github.chinalhr.gungnir.netchannel.config.GungnirClientConfig;
 import io.github.chinalhr.gungnir.protocol.ConsumerService;
@@ -22,9 +23,7 @@ import org.springframework.util.StringUtils;
 import java.lang.reflect.Proxy;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * @Author : ChinaLHR
@@ -36,6 +35,9 @@ public class GungnirClientProxy extends GungnirClientConfig implements FactoryBe
     private IRegisterCenter registerCenter;
     private String serviceAddress;
     private RegisterObserver observer = new RegisterObserver();
+
+    private final ScheduledExecutorService removeOverdueWrapperService = Executors.newScheduledThreadPool(GeneralUtils.getThreadConfigNumberOfCPU());
+
     public GungnirClientProxy() {
     }
 
@@ -132,6 +134,17 @@ public class GungnirClientProxy extends GungnirClientConfig implements FactoryBe
         consumerService.setServiceName(serviceName);
         consumerService.setGroupName(groupName);
         registerCenter.registerConsumer(consumerService);
+
+        /**
+         * 删除过期
+         */
+        removeOverdueWrapperService.scheduleAtFixedRate(()->{
+            GResponseHolder.responseMap.forEach((id, wrapper)->{
+                    if(System.currentTimeMillis()-wrapper.getCreateTimeMillis()>5000){
+                        GResponseHolder.responseMap.remove(id);
+                    }
+                });
+            },5,5, TimeUnit.SECONDS);
     }
 
     @Override

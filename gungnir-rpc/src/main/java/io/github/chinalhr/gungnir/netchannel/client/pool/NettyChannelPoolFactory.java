@@ -1,12 +1,9 @@
 package io.github.chinalhr.gungnir.netchannel.client.pool;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import io.github.chinalhr.gungnir.netchannel.client.netty.GungnirClientHandler;
 import io.github.chinalhr.gungnir.netchannel.keepalive.ClientHearBeatHandler;
 import io.github.chinalhr.gungnir.protocol.GRequest;
 import io.github.chinalhr.gungnir.protocol.GResponse;
-import io.github.chinalhr.gungnir.protocol.ProviderService;
-import io.github.chinalhr.gungnir.register.zk.RegisterCenter;
 import io.github.chinalhr.gungnir.serializer.ISerializer;
 import io.github.chinalhr.gungnir.serializer.netty.GDecoder;
 import io.github.chinalhr.gungnir.serializer.netty.GEncoder;
@@ -27,6 +24,8 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+
+import static io.github.chinalhr.gungnir.common.Constant.*;
 
 /**
  * @Author : ChinaLHR
@@ -139,7 +138,7 @@ public class NettyChannelPoolFactory {
                             ChannelPipeline pipeline = ch.pipeline();
                             pipeline.addLast(new GEncoder(GRequest.class, serializer));
                             pipeline.addLast(new GDecoder(GResponse.class, serializer));
-                            pipeline.addLast(new IdleStateHandler(0,0,5));
+                            pipeline.addLast(new IdleStateHandler(0,0,CLIENT_ALLIDLE_TIMESECONDS));
                             pipeline.addLast(new ClientHearBeatHandler());
                             pipeline.addLast(new GungnirClientHandler());
                         }
@@ -180,6 +179,13 @@ public class NettyChannelPoolFactory {
      * 当zookeeper节点相应的Group发生变化时，清除ChannelPool缓存
      */
     public void cleanChannelPoolMap(){
+        channelPoolMap.forEach((address,map)->{
+            map.forEach((s,queue)->{
+                while (queue.poll()!=null){
+                    queue.poll().close();//关闭channel
+                }
+            });
+        });
         channelPoolMap.clear();
     }
 

@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
         version = "1.0.0",
         groupName = "dev",
         weight = 2)
-@Service
 public class DataServiceImpl implements IDataService {
 
     @Override

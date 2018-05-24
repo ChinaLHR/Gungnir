@@ -9,6 +9,9 @@ package io.github.chinalhr.gungnir.register;
  */
 public interface RegisterCenterObserver {
 
+    /**
+     * 服务生产者发生变化
+     */
     void updateProviderService();
 
 }

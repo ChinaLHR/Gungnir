@@ -1,12 +1,11 @@
 //TODO RPC内核
-TCP长连接，心跳检测
+TCP长连接，心跳检测——>oj8k
 软负载均衡算法实现——>oj8k
 增加RPC 序列化协议kryo ——>oj8k
-增加Filter
-优化apache pool——>oj8k
+增加Filter——>oj8k
+增加默认Filter
 整合Spring Boot
 zookeeper优化——>oj8k
-Listener（服务暴露/销毁时回调）
 使用异步获取优化Send逻辑——>oj8k
 增加熔断机制
 Gungnir Server Handler业务线程池——>oj8k
@@ -21,5 +20,3 @@ JMX服务监控
 服务分组路由——>oj8k
 服务依赖关系分析
 服务调用链路跟踪
-
-

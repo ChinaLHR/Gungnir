@@ -1,10 +1,14 @@
 package io.github.chinalhr.gungnir.netchannel.server;
 
+import io.github.chinalhr.gungnir.annonation.GFilter;
 import io.github.chinalhr.gungnir.annonation.GService;
+import io.github.chinalhr.gungnir.filter.FilterHolder;
+import io.github.chinalhr.gungnir.filter.ProviderFilter;
 import io.github.chinalhr.gungnir.netchannel.config.GungnirServerConfig;
 import io.github.chinalhr.gungnir.protocol.ProviderService;
 import io.github.chinalhr.gungnir.register.zk.RegisterCenter;
 import io.github.chinalhr.gungnir.netchannel.server.netty.GungnirServer;
+import io.github.chinalhr.gungnir.utils.ApplicationContextUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,11 +36,11 @@ public class GungnirServerFactory extends GungnirServerConfig implements Applica
     private static final Logger LOGGER = LoggerFactory.getLogger(GungnirServerFactory.class);
 
     /**
-     * Service Map
+     * Bean Map
      */
-    private static Map<String, Object> serviceMap = new HashMap<>();
+    public static Map<String, Object> serviceMap = new HashMap<>();
+    public static List<ProviderService> providerServices = new ArrayList<>();
 
-    private static List<ProviderService> providerServices = new ArrayList<>();
     /**
      * field
      */
@@ -58,14 +62,18 @@ public class GungnirServerFactory extends GungnirServerConfig implements Applica
 
 
     /**
-     * 在构建Bean的时候对RPCService进行获取,并载入配置
+     * 在构建Bean的时候对RPCService/RPCFilter进行获取,并载入配置
      *
      * @param applicationContext
      * @throws BeansException
      */
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        ApplicationContextUtils.setApplicationContext(applicationContext);
+
         Map<String, Object> serviceBeanMap = applicationContext.getBeansWithAnnotation(GService.class);
+        Map<String, Object> filterBeanMap = applicationContext.getBeansWithAnnotation(GFilter.class);
+
         RegisterCenter center = RegisterCenter.getInstance();
         if (!MapUtils.isEmpty(serviceBeanMap)) {
             for (Object serviceBean : serviceBeanMap.values()) {
@@ -78,17 +86,18 @@ public class GungnirServerFactory extends GungnirServerConfig implements Applica
                 }
                 serviceMap.put(serviceName, serviceBean);
 
-                //build ProviderServices
+                //build ProviderServices并进行注册
                 ProviderService providerService = buildProviderService(serviceName, annotation);
                 providerServices.add(providerService);
                 center.registerProvider(providerServices);
+
             }
         }
-        InvokeOperation.setServiceMap(serviceMap);
+
     }
 
     /**
-     * 根据注解源数据于serviceName构建ProviderService
+     * 根据注解源数据与serviceName构建ProviderService
      * @param serviceName
      * @param metaDate
      * @return

@@ -27,6 +27,10 @@ public class GResponseWrapper {
         this.createTimeMillis = createTimeMillis;
     }
 
+    public long getCreateTimeMillis() {
+        return createTimeMillis;
+    }
+
     public static GResponseWrapper build(){
         return new GResponseWrapper();
     }

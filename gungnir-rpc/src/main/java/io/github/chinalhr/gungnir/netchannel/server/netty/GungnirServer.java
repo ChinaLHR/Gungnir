@@ -22,6 +22,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static io.github.chinalhr.gungnir.common.Constant.*;
+
 /**
  * @Author : ChinaLHR
  * @Date : Create in 23:16 2018/1/5
@@ -74,7 +76,7 @@ public class GungnirServer implements IServer {
                                 .addLast(defaultGroup,
                                         new GEncoder(GResponse.class, serializer),
                                         new GDecoder(GRequest.class, serializer),
-                                        new IdleStateHandler(10,0,0),
+                                        new IdleStateHandler(SERVER_READERIDLE_TIMESECONDS,0,0),
                                         new ServerHearBeatHandler(),
                                         new GServerHandler()
                                 );

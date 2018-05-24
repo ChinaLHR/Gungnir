@@ -7,28 +7,19 @@ import net.sf.cglib.reflect.FastMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
-import java.util.Map;
+
+import static io.github.chinalhr.gungnir.netchannel.server.GungnirServerFactory.*;
 
 /**
  * @Author : ChinaLHR
  * @Date : Create in 10:17 2018/3/19
  * @Email : 13435500980@163.com
  * <p>
- * 维护ServiceMap，对request中的service进行反射调用
+ * Servicer操作类
  */
 public class InvokeOperation {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(InvokeOperation.class);
-
-    /**
-     * Service Map
-     */
-    private static Map<String, Object> serviceMap = new HashMap<>();
-
-    public static void setServiceMap(Map<String, Object> serviceMap) {
-        InvokeOperation.serviceMap = serviceMap;
-    }
 
     /**
      * 通过CGLIB调用

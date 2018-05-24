@@ -12,13 +12,13 @@ import java.util.Date;
 public class TimeStampUtils {
 
     /**
-     * 将时间转换为时间戳
+     * 将时间转换为时间戳(秒级别)
      * @param date 日期时间
      * @param format 格式："yyyy-MM-dd HH:mm:ss"
      * @return
      * @throws ParseException
      */
-    public static String dateToStamp(String date,String format) throws ParseException {
+    public static String dateToStampWithS(String date,String format) throws ParseException {
         String res;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
         Date d = simpleDateFormat.parse(date);
@@ -28,12 +28,28 @@ public class TimeStampUtils {
     }
 
     /**
-     * 将时间戳转换为时间
+     * 将时间转换为时间戳(毫秒级别)
+     * @param date
+     * @param format
+     * @return
+     * @throws ParseException
+     */
+    public static String dateToStampWithMS(String date,String format) throws ParseException {
+        String res;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
+        Date d = simpleDateFormat.parse(date);
+        res = String.valueOf(d.getTime());
+        return res;
+    }
+
+
+    /**
+     * 将时间戳转换为时间(秒级别)
      * @param stamp 时间戳
      * @param format 格式："yyyy-MM-dd HH:mm:ss"
      * @return
      */
-    public static String stampToDate(String stamp,String format){
+    public static String stampWithSToDate(String stamp,String format){
         String res;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
         long lt = new Long(stamp)*1000;
@@ -41,6 +57,22 @@ public class TimeStampUtils {
         res = simpleDateFormat.format(d);
         return res;
     }
+
+    /**
+     * 将时间戳转换为时间(毫秒级别)
+     * @param stamp
+     * @param format
+     * @return
+     */
+    public static String stampWithMSToDate(String stamp,String format){
+        String res;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
+        long lt = new Long(stamp);
+        Date d = new Date(lt);
+        res = simpleDateFormat.format(d);
+        return res;
+    }
+
 
     /**
      * 获取当前时间的UNIX时间戳(秒级别)

@@ -1,5 +1,7 @@
 package io.github.chinalhr.gungnir.netchannel.server.netty;
 
+import io.github.chinalhr.gungnir.filter.FilterInvoker;
+import io.github.chinalhr.gungnir.netchannel.server.FilterOperation;
 import io.github.chinalhr.gungnir.protocol.GRequest;
 import io.github.chinalhr.gungnir.protocol.GResponse;
 import io.github.chinalhr.gungnir.netchannel.server.InvokeOperation;
@@ -18,7 +20,7 @@ import java.util.concurrent.ExecutorService;
  *
  * RPC Server Handler ：接受Request,对Service进行CGLIB调用，返回Request
  */
-public class GServerHandler extends SimpleChannelInboundHandler<GRequest>{
+public class GServerHandler extends SimpleChannelInboundHandler<GRequest> implements FilterInvoker {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GServerHandler.class);
 
@@ -26,7 +28,8 @@ public class GServerHandler extends SimpleChannelInboundHandler<GRequest>{
     protected void channelRead0(ChannelHandlerContext ctx, GRequest request) throws Exception {
         ExecutorService handlerThreadPool = GungnirServerThreadPoolManager.getHandlerThreadPool();
         handlerThreadPool.execute(()->{
-            GResponse response = InvokeOperation.invokeService(request, null);
+            FilterInvoker filterInvoker = FilterOperation.buildInvokerChain(this);
+            GResponse response = filterInvoker.invoker(request);
             ctx.writeAndFlush(response);
         });
     }
@@ -35,5 +38,10 @@ public class GServerHandler extends SimpleChannelInboundHandler<GRequest>{
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         LOGGER.error("Gungnir Netty Server exceptionCaught : {} ",cause.fillInStackTrace());
         ctx.close();
+    }
+
+    @Override
+    public GResponse invoker(GRequest request) {
+        return InvokeOperation.invokeService(request, null);
     }
 }

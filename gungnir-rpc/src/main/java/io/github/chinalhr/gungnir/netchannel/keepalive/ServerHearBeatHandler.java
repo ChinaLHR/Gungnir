@@ -36,7 +36,7 @@ public class ServerHearBeatHandler extends ChannelInboundHandlerAdapter{
         }
 
         if (request.getHeartbeat().getType()== HearbeatEnum.PING.getType()){
-            LOGGER.info("ServerHearBeatHandler channelRead ,Read the PING data is:{}",TimeStampUtils.stampToDate(request.getHeartbeat().getTimeStamp(),"yyyy-MM-dd-HH-mm:ss:ms"));
+            LOGGER.info("ServerHearBeatHandler channelRead ,Read the PING data is:{}",TimeStampUtils.stampWithMSToDate(request.getHeartbeat().getTimeStamp(),"yyyy-MM-dd HH:mm:ss:ms"));
             this.sendPong(ctx);
         } else {
             ctx.fireChannelRead(msg);

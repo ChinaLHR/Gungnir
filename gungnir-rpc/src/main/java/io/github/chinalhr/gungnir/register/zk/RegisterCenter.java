@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static io.github.chinalhr.gungnir.common.Constant.*;
+
 /**
  * @Author : ChinaLHR
  * @Date : Create in 11:55 2018/5/9
@@ -89,7 +91,6 @@ public class RegisterCenter implements IRegisterCenter {
         return consumerServiceMap;
     }
 
-    //TODO 增加监听机制
     @Override
     public void initProviderMap() {
         String registryPath = ROOT_PATH;
