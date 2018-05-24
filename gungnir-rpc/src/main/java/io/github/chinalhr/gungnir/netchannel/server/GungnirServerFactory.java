@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @Author : ChinaLHR
@@ -36,9 +37,15 @@ public class GungnirServerFactory extends GungnirServerConfig implements Applica
     private static final Logger LOGGER = LoggerFactory.getLogger(GungnirServerFactory.class);
 
     /**
-     * Bean Map
+     * ServiceName - Bean
      */
     public static Map<String, Object> serviceMap = new HashMap<>();
+
+    /**
+     * ServiceName - maxConcurrent
+     */
+    public static Map<String,Integer> concurrentMap = new ConcurrentHashMap<>();
+
     public static List<ProviderService> providerServices = new ArrayList<>();
 
     /**
@@ -86,11 +93,16 @@ public class GungnirServerFactory extends GungnirServerConfig implements Applica
                 }
                 serviceMap.put(serviceName, serviceBean);
 
+                //build concurrentMap
+                int maxConcurrent = annotation.maxConcurrent();
+                if (maxConcurrent!=0){
+                    concurrentMap.put(serviceName,maxConcurrent);
+                }
+
                 //build ProviderServices并进行注册
                 ProviderService providerService = buildProviderService(serviceName, annotation);
                 providerServices.add(providerService);
                 center.registerProvider(providerServices);
-
             }
         }
 

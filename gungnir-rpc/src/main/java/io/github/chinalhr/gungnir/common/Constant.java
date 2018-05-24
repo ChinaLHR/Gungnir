@@ -19,4 +19,5 @@ public interface Constant {
      */
     int SERVER_READERIDLE_TIMESECONDS = 10;
     int CLIENT_ALLIDLE_TIMESECONDS = 5;
+    int CLIENT_WRAPPER_TIMEOUT = 60*1000*3;
 }

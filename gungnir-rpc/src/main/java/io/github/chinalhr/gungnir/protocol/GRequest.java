@@ -26,9 +26,19 @@ public class GRequest implements Serializable{
 
     private String methodName;
 
+    private int maxConcurrent;
+
     private Class<?>[] parameterTypes;
 
     private Object[] parameters;
+
+    public int getMaxConcurrent() {
+        return maxConcurrent;
+    }
+
+    public void setMaxConcurrent(int maxConcurrent) {
+        this.maxConcurrent = maxConcurrent;
+    }
 
     public String getRequestID() {
         return requestID;

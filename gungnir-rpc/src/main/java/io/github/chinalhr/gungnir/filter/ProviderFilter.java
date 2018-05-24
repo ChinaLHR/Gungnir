@@ -13,6 +13,6 @@ import io.github.chinalhr.gungnir.protocol.GResponse;
 @FunctionalInterface
 public interface ProviderFilter {
 
-    GResponse invoke(FilterInvoker parentInvoker, GRequest request);
+    GResponse invoke(FilterInvoker nextInvoker, GRequest request);
 
 }

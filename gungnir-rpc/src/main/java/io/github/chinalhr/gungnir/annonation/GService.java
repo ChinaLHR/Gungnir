@@ -40,4 +40,11 @@ public @interface GService {
      * @return
      */
     String groupName() default "default";
+
+    /**
+     * 每秒最高并发数量
+     * @return
+     */
+    int maxConcurrent() default 0;
+
 }

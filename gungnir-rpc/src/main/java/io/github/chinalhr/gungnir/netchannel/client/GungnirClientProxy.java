@@ -25,6 +25,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.*;
 
+import static io.github.chinalhr.gungnir.common.Constant.CLIENT_WRAPPER_TIMEOUT;
+
 /**
  * @Author : ChinaLHR
  * @Date : Create in 14:13 2018/4/26
@@ -138,13 +140,13 @@ public class GungnirClientProxy extends GungnirClientConfig implements FactoryBe
         /**
          * 删除过期
          */
-        removeOverdueWrapperService.scheduleAtFixedRate(()->{
-            GResponseHolder.responseMap.forEach((id, wrapper)->{
-                    if(System.currentTimeMillis()-wrapper.getCreateTimeMillis()>5000){
-                        GResponseHolder.responseMap.remove(id);
-                    }
-                });
-            },5,5, TimeUnit.SECONDS);
+//        removeOverdueWrapperService.scheduleAtFixedRate(()->{
+//            GResponseHolder.responseMap.forEach((id, wrapper)->{
+//                    if(System.currentTimeMillis()-wrapper.getCreateTimeMillis()>CLIENT_WRAPPER_TIMEOUT){
+//                        GResponseHolder.responseMap.remove(id);
+//                    }
+//                });
+//            },10,5, TimeUnit.SECONDS);
     }
 
     @Override
