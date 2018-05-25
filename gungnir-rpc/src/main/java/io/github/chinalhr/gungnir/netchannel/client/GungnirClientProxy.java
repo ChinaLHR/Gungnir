@@ -2,7 +2,6 @@ package io.github.chinalhr.gungnir.netchannel.client;
 
 import io.github.chinalhr.gungnir.exception.GRpcRuntimeException;
 import io.github.chinalhr.gungnir.netchannel.client.future.GResponseCallback;
-import io.github.chinalhr.gungnir.netchannel.client.future.GResponseHolder;
 import io.github.chinalhr.gungnir.netchannel.client.pool.NettyChannelPoolFactory;
 import io.github.chinalhr.gungnir.netchannel.config.GungnirClientConfig;
 import io.github.chinalhr.gungnir.protocol.ConsumerService;
@@ -25,8 +24,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.*;
 
-import static io.github.chinalhr.gungnir.common.Constant.CLIENT_WRAPPER_TIMEOUT;
-
 /**
  * @Author : ChinaLHR
  * @Date : Create in 14:13 2018/4/26
@@ -37,8 +34,6 @@ public class GungnirClientProxy extends GungnirClientConfig implements FactoryBe
     private IRegisterCenter registerCenter;
     private String serviceAddress;
     private RegisterObserver observer = new RegisterObserver();
-
-    private final ScheduledExecutorService removeOverdueWrapperService = Executors.newScheduledThreadPool(GeneralUtils.getThreadConfigNumberOfCPU());
 
     public GungnirClientProxy() {
     }
@@ -136,17 +131,6 @@ public class GungnirClientProxy extends GungnirClientConfig implements FactoryBe
         consumerService.setServiceName(serviceName);
         consumerService.setGroupName(groupName);
         registerCenter.registerConsumer(consumerService);
-
-        /**
-         * 删除过期
-         */
-//        removeOverdueWrapperService.scheduleAtFixedRate(()->{
-//            GResponseHolder.responseMap.forEach((id, wrapper)->{
-//                    if(System.currentTimeMillis()-wrapper.getCreateTimeMillis()>CLIENT_WRAPPER_TIMEOUT){
-//                        GResponseHolder.responseMap.remove(id);
-//                    }
-//                });
-//            },10,5, TimeUnit.SECONDS);
     }
 
     @Override

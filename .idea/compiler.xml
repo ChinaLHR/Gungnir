@@ -6,10 +6,6 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="gungnir-example-api" />
-        <module name="gungnir-example-client" />
-        <module name="gungnir-example-server" />
-        <module name="gungnir-example-server2" />
         <module name="gungnir-rpc" />
       </profile>
     </annotationProcessing>
