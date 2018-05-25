@@ -13,6 +13,8 @@ import java.util.List;
  * @Author : ChinaLHR
  * @Date : Create in 21:39 2018/5/23
  * @Email : 13435500980@163.com
+ *
+ * Filter操作类
  */
 public class FilterOperation {
 

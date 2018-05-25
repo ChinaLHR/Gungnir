@@ -13,8 +13,7 @@ import org.springframework.stereotype.Service;
 @GService(value = IDataService.class,
           version = "1.0.0",
           groupName = "dev",
-          weight = 10,
-          maxConcurrent = 1)
+          weight = 10)
 public class DataServiceImpl implements IDataService{
 
     @Override

@@ -79,7 +79,6 @@ public class GungnirServerFactory extends GungnirServerConfig implements Applica
         ApplicationContextUtils.setApplicationContext(applicationContext);
 
         Map<String, Object> serviceBeanMap = applicationContext.getBeansWithAnnotation(GService.class);
-        Map<String, Object> filterBeanMap = applicationContext.getBeansWithAnnotation(GFilter.class);
 
         RegisterCenter center = RegisterCenter.getInstance();
         if (!MapUtils.isEmpty(serviceBeanMap)) {

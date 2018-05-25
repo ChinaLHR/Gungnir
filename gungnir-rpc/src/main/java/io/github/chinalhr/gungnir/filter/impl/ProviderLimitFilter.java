@@ -1,18 +1,16 @@
 package io.github.chinalhr.gungnir.filter.impl;
 
 import com.google.common.util.concurrent.RateLimiter;
-import io.github.chinalhr.gungnir.annonation.GFilter;
 import io.github.chinalhr.gungnir.filter.FilterInvoker;
 import io.github.chinalhr.gungnir.filter.ProviderFilter;
 import io.github.chinalhr.gungnir.protocol.GRequest;
 import io.github.chinalhr.gungnir.protocol.GResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static io.github.chinalhr.gungnir.filter.FilterHolder.getServiceName;
 import static io.github.chinalhr.gungnir.netchannel.server.GungnirServerFactory.concurrentMap;
 
 /**
@@ -30,10 +28,8 @@ public class ProviderLimitFilter implements ProviderFilter{
     @Override
     public GResponse invoke(FilterInvoker nextInvoker, GRequest request)
     {
-        LOGGER.info("before acquire,"+new Date());
         acquire(request);
         GResponse invoker = nextInvoker.invoker(request);
-        LOGGER.info("after acquire,"+new Date());
         return invoker;
     }
 
@@ -54,15 +50,7 @@ public class ProviderLimitFilter implements ProviderFilter{
         }
     }
 
-    public static String getServiceName(GRequest request){
-        String serviceName = null;
-        if (request.getVersion()==""||request.getVersion()==null)
-            serviceName = request.getClassName();
-        else
-            serviceName = request.getClassName() + '-' + request.getVersion();
 
-        return serviceName;
-    }
 
     public static ProviderLimitFilter of(){
         return new ProviderLimitFilter();

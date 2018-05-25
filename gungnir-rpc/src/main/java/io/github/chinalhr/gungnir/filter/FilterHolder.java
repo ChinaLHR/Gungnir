@@ -3,6 +3,7 @@ package io.github.chinalhr.gungnir.filter;
 import io.github.chinalhr.gungnir.annonation.GFilter;
 import io.github.chinalhr.gungnir.exception.GRpcRuntimeException;
 import io.github.chinalhr.gungnir.filter.impl.ProviderLimitFilter;
+import io.github.chinalhr.gungnir.protocol.GRequest;
 import org.apache.commons.collections4.MapUtils;
 
 import java.util.*;
@@ -18,7 +19,7 @@ import static io.github.chinalhr.gungnir.utils.ApplicationContextUtils.getApplic
  * Filter构建Utils
  */
 public class FilterHolder {
-
+    private static Map<String, ProviderFilter> filterMap;
     /**
      * 获取Filter List(从Order大到小)
      * @return
@@ -43,17 +44,29 @@ public class FilterHolder {
      * @return
      */
     public static Map<String,ProviderFilter> getFilterMap(){
-        List<Object> gFilterList = getFilterList();
-        HashMap<String, ProviderFilter> filterMap = new LinkedHashMap<>();
-        gFilterList.forEach(filterBean->{
-            Class<?>[] interfaces = filterBean.getClass().getInterfaces();
-            for (Class<?> clazz : interfaces){
-                if (clazz.isAssignableFrom(ProviderFilter.class)){
-                    filterMap.put(filterBean.getClass().getName(), (ProviderFilter) filterBean);
-                }
-            }
-        });
+       if (MapUtils.isEmpty(filterMap)){
+           filterMap = new LinkedHashMap<>();
+           List<Object> gFilterList = getFilterList();
+           Map<String, ProviderFilter> filterMap = new LinkedHashMap<>();
+           gFilterList.forEach(filterBean->{
+               Class<?>[] interfaces = filterBean.getClass().getInterfaces();
+               for (Class<?> clazz : interfaces){
+                   if (clazz.isAssignableFrom(ProviderFilter.class)){
+                       filterMap.put(filterBean.getClass().getName(), (ProviderFilter) filterBean);
+                   }
+               }
+           });
+       }
         return filterMap;
     }
 
+    public static String getServiceName(GRequest request){
+        String serviceName = null;
+        if (request.getVersion()==""||request.getVersion()==null)
+            serviceName = request.getClassName();
+        else
+            serviceName = request.getClassName() + '-' + request.getVersion();
+
+        return serviceName;
+    }
 }

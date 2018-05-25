@@ -1,6 +1,7 @@
 package io.github.chinalhr.gungnir.filter;
 
 import io.github.chinalhr.gungnir.filter.impl.ProviderLimitFilter;
+import io.github.chinalhr.gungnir.filter.impl.ProviderListenerFilter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ public class GungnirFilterManager {
 
     static {
         gungnirFilterList.add(ProviderLimitFilter.of());
+        gungnirFilterList.add(ProviderListenerFilter.of());
     }
 
     public static List<ProviderFilter> getGungnirFilterList() {
