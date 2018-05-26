@@ -1,1 +1,8 @@
 language: java
+sudo: true
+jdk:
+- openjdk8
+before_install:
+- chmod +x ./mvnw
+script:
+-"./mvnw test -B"
