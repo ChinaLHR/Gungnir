@@ -26,5 +26,4 @@ public class BeanConfig {
         iDataServicce.setLoadBalance("random");
         return iDataServicce;
     }
-
 }

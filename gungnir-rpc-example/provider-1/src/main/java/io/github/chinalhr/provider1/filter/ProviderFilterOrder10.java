@@ -11,10 +11,10 @@ import io.github.chinalhr.gungnir.protocol.GResponse;
  * @Date : Create in 21:34 2018/5/25
  * @Email : 13435500980@163.com
  */
+
+//GFilter 服务提供者Filter order：顺序值
 @GFilter(order = 10)
 public class ProviderFilterOrder10 implements ProviderFilter {
-
-
     @Override
     public GResponse invoke(FilterInvoker filterInvoker, GRequest gRequest) {
         System.out.println("Filter======10=========");

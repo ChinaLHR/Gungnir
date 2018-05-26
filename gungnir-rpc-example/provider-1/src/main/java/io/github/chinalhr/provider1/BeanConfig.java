@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 public class BeanConfig {
 
     /**
-     * 配置服务提供者工厂
+     * 配置服务提供者
      * @return
      */
     @Bean
