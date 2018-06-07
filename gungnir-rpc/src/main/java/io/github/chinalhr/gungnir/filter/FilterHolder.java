@@ -16,7 +16,7 @@ import static io.github.chinalhr.gungnir.utils.ApplicationContextUtils.getApplic
  * @Date : Create in 16:58 2018/5/23
  * @Email : 13435500980@163.com
  *
- * Filter构建Utils
+ * Filter构建Holder
  */
 public class FilterHolder {
     private static Map<String, ProviderFilter> filterMap;

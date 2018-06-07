@@ -28,6 +28,7 @@ public class ProviderLimitFilter implements ProviderFilter{
     @Override
     public GResponse invoke(FilterInvoker nextInvoker, GRequest request)
     {
+        LOGGER.info("ProviderLimitFilter invoker");
         acquire(request);
         GResponse invoker = nextInvoker.invoker(request);
         return invoker;
@@ -49,8 +50,6 @@ public class ProviderLimitFilter implements ProviderFilter{
             return;
         }
     }
-
-
 
     public static ProviderLimitFilter of(){
         return new ProviderLimitFilter();

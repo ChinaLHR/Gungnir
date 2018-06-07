@@ -17,7 +17,7 @@ import static io.github.chinalhr.gungnir.utils.ApplicationContextUtils.*;
  * @Date : Create in 23:00 2018/5/24
  * @Email : 13435500980@163.com
  *
- * Lister构建Utils
+ * Lister构建Holder
  */
 public class ListenerHolder {
 
