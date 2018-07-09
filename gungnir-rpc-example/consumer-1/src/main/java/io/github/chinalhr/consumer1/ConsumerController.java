@@ -26,7 +26,7 @@ public class ConsumerController {
             String s = iDataService.helloWorld();
             System.out.println("获取到数据==================>"+s);
         }
-        long endTime=System.currentTimeMillis(); //获取结束时间
+        long endTime=System.currentTimeMillis();
         return "程序运行时间： "+(endTime-startTime)+"ms";
     }
 
