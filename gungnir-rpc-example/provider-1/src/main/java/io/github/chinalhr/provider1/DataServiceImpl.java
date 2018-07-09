@@ -10,7 +10,7 @@ import io.github.chinalhr.serviceapi.IDataService;
  */
 
 //value：服务发布接口 version：版本 groupName：分组 weight：权重 maxConcurrent:服务限流/秒
-@GService(value = IDataService.class, version = "1.0.0", groupName = "dev", weight = 10,maxConcurrent = 10)
+@GService(value = IDataService.class, version = "1.0.0", groupName = "dev", weight = 10,maxConcurrent = 100)
 public class DataServiceImpl implements IDataService{
 
     @Override

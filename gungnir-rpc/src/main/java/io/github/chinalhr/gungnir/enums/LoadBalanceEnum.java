@@ -18,7 +18,7 @@ public enum LoadBalanceEnum {
 
     public final ILoadBalance loadBalance;
 
-    private LoadBalanceEnum(ILoadBalance loadBalance) {
+    LoadBalanceEnum(ILoadBalance loadBalance) {
         this.loadBalance = loadBalance;
     }
 
