@@ -16,10 +16,6 @@ import java.util.Map;
  */
 public interface IRegisterCenter {
 
-//    String ROOT_PATH="/gungnir";
-//    String PROVIDER_TYPE = "provider";
-//    String CONSUMER_TYPE = "consumer";
-
     /**
      * 进行服务提供者注册
      * @param providerServices

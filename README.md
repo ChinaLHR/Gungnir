@@ -17,6 +17,11 @@ Gungnir基于Spring、Netty、Zookeeper，是一个轻量级的分布式RPC服�
 - 基于Netty IdleStateHandler实现Ping-Pong心跳重连机制
 - 客户端服务消费者异步调用服务，支持自定义Netty Channel Queue大小
 
+## 实现
+### 服务的发布与服务的引入
+发布：GungnirServerFactory通过实现ApplicationContextAware接口，利用setApplicationContext达到对当前程序的GService的获取，用ServiceName-Object来维护GService集合<br/>
+引入：GungnirClientProxy通过实现FactoryBean接口，再调用服务时
+
 ## 使用
 
 ### 服务提供者
@@ -119,6 +124,7 @@ Gungnir基于Spring、Netty、Zookeeper，是一个轻量级的分布式RPC服�
 
 ## TODO
 
+- 分布式锁的引入
 - 使用JMX（Java Management Extensions）技术对Gungnir进行服务提供者调用监控
 - 增加服务治理功能，如：服务下线，服务依赖关系分析，服务调用链路分析...
 - 增加熔断降级机制（考虑整合hystrix）

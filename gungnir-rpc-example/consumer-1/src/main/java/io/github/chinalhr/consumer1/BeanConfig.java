@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 public class BeanConfig {
 
 
-    @Bean
+    @Bean(name = "IDataService")
     public GungnirClientProxy getGungnirClientProxy(){
         GungnirClientProxy iDataServicce = new GungnirClientProxy();
         iDataServicce.setSerializer("protostuff");
