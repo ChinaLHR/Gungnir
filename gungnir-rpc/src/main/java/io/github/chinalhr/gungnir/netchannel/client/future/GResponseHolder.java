@@ -1,8 +1,6 @@
 package io.github.chinalhr.gungnir.netchannel.client.future;
 
 import io.github.chinalhr.gungnir.protocol.GResponse;
-import io.github.chinalhr.gungnir.utils.GeneralUtils;
-import sun.misc.ThreadGroupUtils;
 
 import java.util.Map;
 import java.util.concurrent.*;
