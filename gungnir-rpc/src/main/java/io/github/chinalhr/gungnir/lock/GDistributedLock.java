@@ -8,12 +8,19 @@ package io.github.chinalhr.gungnir.lock;
 public interface GDistributedLock {
 
     /**
-     * 分布式锁执行
+     * 分布式锁执行(非阻塞)
      * @param lockId
      * @param timeout
-     * @param callback
+     * @param unBlockCallback
      * @return
      */
-    Object execute(String lockId,int timeout,Callback callback);
+    Object execute(String lockId, int timeout, UnBlockCallback unBlockCallback);
 
+    /**
+     * 分布式锁执行(阻塞)
+     * @param lockId
+     * @param unBlockCallback
+     * @return
+     */
+    Object execute(String lockId, UnBlockCallback unBlockCallback);
 }

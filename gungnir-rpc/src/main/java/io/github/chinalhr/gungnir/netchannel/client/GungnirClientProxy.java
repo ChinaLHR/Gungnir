@@ -1,6 +1,7 @@
 package io.github.chinalhr.gungnir.netchannel.client;
 
 import io.github.chinalhr.gungnir.exception.GRpcRuntimeException;
+import io.github.chinalhr.gungnir.lock.pool.GRedisPool;
 import io.github.chinalhr.gungnir.netchannel.client.future.GResponseCallback;
 import io.github.chinalhr.gungnir.netchannel.client.pool.NettyChannelPoolFactory;
 import io.github.chinalhr.gungnir.netchannel.config.GungnirClientConfig;
@@ -118,7 +119,7 @@ public class GungnirClientProxy extends GungnirClientConfig implements FactoryBe
     public void afterPropertiesSet() throws Exception {
         registerCenter = RegisterCenter.getInstance();
         registerCenter.initProviderMap();
-
+        GRedisPool.initPool();
         registerCenter.attach(groupName,observer);
         //进行消费者注册
         String serviceName = iclass.getName();

@@ -128,6 +128,5 @@ Gungnir基于Spring、Netty、Zookeeper，是一个轻量级的分布式RPC服�
 - 使用JMX（Java Management Extensions）技术对Gungnir进行服务提供者调用监控
 - 增加服务治理功能，如：服务下线，服务依赖关系分析，服务调用链路分析...
 - 增加熔断降级机制（考虑整合hystrix）
-- 服务治理，服务监控后台管理可视化实现
 - 对Gungnir进行性能分析
 - 优化服务消费者进行服务调用的异步逻辑

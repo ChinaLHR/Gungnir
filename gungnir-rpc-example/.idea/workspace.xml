@@ -2,18 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="13aaac81-9a3f-4e72-82b4-0046b993f330" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__com_caucho_hessian_4_0_38.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__com_dyuproject_protostuff_protostuff_api_1_0_8.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__com_dyuproject_protostuff_protostuff_collectionschema_1_0_8.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__com_dyuproject_protostuff_protostuff_core_1_0_8.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__com_dyuproject_protostuff_protostuff_runtime_1_0_8.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__junit_junit_4_11.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__log4j_log4j_1_2_17.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_apache_commons_commons_collections4_4_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_objenesis_objenesis_2_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/libraries/Maven__org_slf4j_slf4j_log4j12_1_7_7.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../gungnir-rpc/src/main/java/io/github/chinalhr/gungnir/netchannel/client/future/GResponseHolder.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gungnir-rpc/src/main/java/io/github/chinalhr/gungnir/netchannel/client/future/GResponseHolder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gungnir-rpc/src/main/java/io/github/chinalhr/gungnir/lock/BlockCallback.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gungnir-rpc/src/main/java/io/github/chinalhr/gungnir/lock/pool/GRedisPool.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gungnir-rpc/src/main/java/io/github/chinalhr/gungnir/lock/redis/DistributedLockDaemon.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gungnir-rpc/src/main/java/io/github/chinalhr/gungnir/lock/redis/RedisGDistributedLockHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../gungnir-rpc/src/main/java/io/github/chinalhr/gungnir/utils/Func.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gungnir-rpc/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../gungnir-rpc/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gungnir-rpc/src/main/java/io/github/chinalhr/gungnir/lock/Callback.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gungnir-rpc/src/main/java/io/github/chinalhr/gungnir/lock/UnBlockCallback.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gungnir-rpc/src/main/java/io/github/chinalhr/gungnir/lock/GDistributedLock.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gungnir-rpc/src/main/java/io/github/chinalhr/gungnir/lock/GDistributedLock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gungnir-rpc/src/main/java/io/github/chinalhr/gungnir/lock/GDistributedLockHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gungnir-rpc/src/main/java/io/github/chinalhr/gungnir/lock/GDistributedLockHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gungnir-rpc/src/main/java/io/github/chinalhr/gungnir/lock/redis/RedisDistributedLock.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gungnir-rpc/src/main/java/io/github/chinalhr/gungnir/lock/redis/RedisGDistributedLock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gungnir-rpc/src/main/java/io/github/chinalhr/gungnir/netchannel/client/GungnirClientProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gungnir-rpc/src/main/java/io/github/chinalhr/gungnir/netchannel/client/GungnirClientProxy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gungnir-rpc/src/main/java/io/github/chinalhr/gungnir/utils/GeneralUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gungnir-rpc/src/main/java/io/github/chinalhr/gungnir/utils/GeneralUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gungnir-rpc/src/main/java/io/github/chinalhr/gungnir/utils/PropertyConfigeUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gungnir-rpc/src/main/java/io/github/chinalhr/gungnir/utils/PropertyConfigeUtils.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/provider-1/target/" />
     <ignored path="$PROJECT_DIR$/service-api/target/" />
@@ -30,9 +32,10 @@
       <usages-collector id="statistics.lifecycle.project">
         <counts>
           <entry key="project.closed" value="2" />
+          <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.51" value="1" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.opened" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -118,7 +121,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/provider-2/src/main/java/io/github/chinalhr/provider2/BeanConfig.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="69">
+            <state relative-caret-position="289">
               <caret line="19" column="32" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="32" />
             </state>
           </provider>
@@ -223,149 +226,12 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="gungnir-rpc-example" type="b2602c69:ProjectViewProjectNode" />
               <item name="gungnir-rpc-example" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gungnir-rpc-example" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gungnir-rpc-example" type="462c0819:PsiDirectoryNode" />
-              <item name="consumer-1" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gungnir-rpc-example" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gungnir-rpc-example" type="462c0819:PsiDirectoryNode" />
-              <item name="consumer-1" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gungnir-rpc-example" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gungnir-rpc-example" type="462c0819:PsiDirectoryNode" />
-              <item name="consumer-1" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gungnir-rpc-example" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gungnir-rpc-example" type="462c0819:PsiDirectoryNode" />
-              <item name="consumer-1" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gungnir-rpc-example" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gungnir-rpc-example" type="462c0819:PsiDirectoryNode" />
-              <item name="consumer-1" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="io" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gungnir-rpc-example" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gungnir-rpc-example" type="462c0819:PsiDirectoryNode" />
-              <item name="consumer-1" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="io" type="462c0819:PsiDirectoryNode" />
-              <item name="github" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gungnir-rpc-example" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gungnir-rpc-example" type="462c0819:PsiDirectoryNode" />
-              <item name="consumer-1" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="io" type="462c0819:PsiDirectoryNode" />
-              <item name="github" type="462c0819:PsiDirectoryNode" />
-              <item name="chinalhr" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gungnir-rpc-example" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gungnir-rpc-example" type="462c0819:PsiDirectoryNode" />
-              <item name="consumer-1" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="io" type="462c0819:PsiDirectoryNode" />
-              <item name="github" type="462c0819:PsiDirectoryNode" />
-              <item name="chinalhr" type="462c0819:PsiDirectoryNode" />
-              <item name="consumer1" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gungnir-rpc-example" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gungnir-rpc-example" type="462c0819:PsiDirectoryNode" />
-              <item name="provider-1" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gungnir-rpc-example" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gungnir-rpc-example" type="462c0819:PsiDirectoryNode" />
-              <item name="provider-1" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gungnir-rpc-example" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gungnir-rpc-example" type="462c0819:PsiDirectoryNode" />
-              <item name="provider-1" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gungnir-rpc-example" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gungnir-rpc-example" type="462c0819:PsiDirectoryNode" />
-              <item name="provider-1" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gungnir-rpc-example" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gungnir-rpc-example" type="462c0819:PsiDirectoryNode" />
-              <item name="provider-1" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="io" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gungnir-rpc-example" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gungnir-rpc-example" type="462c0819:PsiDirectoryNode" />
-              <item name="provider-1" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="io" type="462c0819:PsiDirectoryNode" />
-              <item name="github" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gungnir-rpc-example" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gungnir-rpc-example" type="462c0819:PsiDirectoryNode" />
-              <item name="provider-1" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="io" type="462c0819:PsiDirectoryNode" />
-              <item name="github" type="462c0819:PsiDirectoryNode" />
-              <item name="chinalhr" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="gungnir-rpc-example" type="b2602c69:ProjectViewProjectNode" />
-              <item name="gungnir-rpc-example" type="462c0819:PsiDirectoryNode" />
-              <item name="provider-1" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="io" type="462c0819:PsiDirectoryNode" />
-              <item name="github" type="462c0819:PsiDirectoryNode" />
-              <item name="chinalhr" type="462c0819:PsiDirectoryNode" />
-              <item name="provider1" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="gungnir-rpc-example" type="b2602c69:ProjectViewProjectNode" />
@@ -378,6 +244,7 @@
       </pane>
       <pane id="PackagesPane" />
       <pane id="AndroidView" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -502,17 +369,18 @@
       <workItem from="1527921431635" duration="2075000" />
       <workItem from="1532844416136" duration="166000" />
       <workItem from="1532866117220" duration="743000" />
+      <workItem from="1535466946824" duration="928000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19550000" />
+    <option name="totallyTimeSpent" value="20478000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="0" width="1378" height="772" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26327768" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2670713" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -691,10 +559,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/consumer-1/src/main/java/io/github/chinalhr/consumer1/Consumer1Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/provider-1/src/main/java/io/github/chinalhr/provider1/BeanConfig.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="11" selection-start-line="11" selection-end-line="29" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/provider-1/src/main/java/io/github/chinalhr/provider1/Provider1Application.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/provider-2/src/main/java/io/github/chinalhr/provider2/BeanConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="19" column="32" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="32" />
         </state>
       </provider>
     </entry>
@@ -709,27 +598,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="16" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/provider-1/src/main/java/io/github/chinalhr/provider1/Provider1Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/provider-2/src/main/java/io/github/chinalhr/provider2/BeanConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="19" column="32" selection-start-line="19" selection-start-column="32" selection-end-line="19" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/consumer-1/src/main/java/io/github/chinalhr/consumer1/Consumer1Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
         </state>
       </provider>
     </entry>

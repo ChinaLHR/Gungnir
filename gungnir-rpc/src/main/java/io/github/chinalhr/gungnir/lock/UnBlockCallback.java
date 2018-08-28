@@ -5,7 +5,7 @@ package io.github.chinalhr.gungnir.lock;
  * @Date : Create in 23:36 2018/8/1
  * @Email : 13435500980@163.com
  */
-public interface Callback {
+public interface UnBlockCallback {
 
     /**
      * 获取到锁

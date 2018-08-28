@@ -19,7 +19,7 @@ public class GeneralUtils {
     private static String cacheIp;
 
     /**
-     * todo 分布式uuid生成
+     *
      * 获取UUID
      * @return
      */

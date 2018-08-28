@@ -9,7 +9,9 @@ import java.util.concurrent.TimeUnit;
  */
 public interface GDistributedLockHandler {
 
-    boolean tryLock(long timeout, TimeUnit unit);
+    boolean tryLock(String lockId,long timeout, TimeUnit unit);
+
+    boolean tryLock(String lockId);
 
     void unlock();
 
