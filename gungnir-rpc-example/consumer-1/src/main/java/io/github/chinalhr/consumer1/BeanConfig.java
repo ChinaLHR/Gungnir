@@ -1,7 +1,6 @@
 package io.github.chinalhr.consumer1;
 
-import io.github.chinalhr.gungnir.netchannel.client.GungnirClientProxy;
-import io.github.chinalhr.gungnir.netchannel.server.GungnirServerFactory;
+import io.github.chinalhr.gungnir_rpc.netchannel.client.GungnirClientProxy;
 import io.github.chinalhr.serviceapi.IDataService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -2,21 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ccd37e4c-239a-4b32-88fd-93d492d7b81b" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/BlockCallback.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/pool/GRedisPool.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/redis/DistributedLockDaemon.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/redis/RedisGDistributedLockHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/utils/Func.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gungnir-rpc-example/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../gungnir-rpc-example/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gungnir-rpc-example/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_2_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gungnir-rpc-example/.idea/libraries/Maven__ch_qos_logback_logback_core_1_2_3.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../gungnir-rpc-example/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../gungnir-rpc-example/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gungnir-rpc-example/consumer-1/src/main/java/io/github/chinalhr/consumer1/ConsumerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../gungnir-rpc-example/consumer-1/src/main/java/io/github/chinalhr/consumer1/ConsumerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gungnir-rpc-example/consumer-1/src/main/resources/gungnir.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../gungnir-rpc-example/consumer-1/src/main/resources/gungnir.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/Callback.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/UnBlockCallback.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/GDistributedLock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/GDistributedLock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/GDistributedLockHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/GDistributedLockHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/redis/RedisDistributedLock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/redis/RedisGDistributedLock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/netchannel/client/GungnirClientProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/netchannel/client/GungnirClientProxy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/utils/GeneralUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/utils/GeneralUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/utils/PropertyConfigeUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/utils/PropertyConfigeUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/redis/DistributedLockDaemon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/redis/DistributedLockDaemon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/redis/RedisGDistributedLockHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/redis/RedisGDistributedLockHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/netchannel/keepalive/ClientHearBeatHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/netchannel/keepalive/ClientHearBeatHandler.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,40 +25,44 @@
     <session id="-1068696910">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="15" />
+          <entry key="project.closed" value="23" />
           <entry key="project.open.time.18" value="1" />
-          <entry key="project.open.time.19" value="2" />
-          <entry key="project.open.time.2" value="1" />
+          <entry key="project.open.time.19" value="3" />
+          <entry key="project.open.time.2" value="3" />
           <entry key="project.open.time.23" value="1" />
           <entry key="project.open.time.24" value="1" />
           <entry key="project.open.time.35" value="1" />
           <entry key="project.open.time.42" value="1" />
           <entry key="project.open.time.44" value="1" />
           <entry key="project.open.time.5" value="2" />
+          <entry key="project.open.time.50" value="1" />
           <entry key="project.open.time.52" value="1" />
+          <entry key="project.open.time.59" value="1" />
           <entry key="project.open.time.6" value="2" />
+          <entry key="project.open.time.66" value="1" />
           <entry key="project.open.time.67" value="1" />
+          <entry key="project.open.time.68" value="1" />
           <entry key="project.open.time.80" value="1" />
-          <entry key="project.opened" value="16" />
+          <entry key="project.opened" value="23" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="class" value="2" />
-          <entry key="java" value="28" />
+          <entry key="class" value="4" />
+          <entry key="java" value="35" />
           <entry key="xml" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CLASS" value="2" />
-          <entry key="JAVA" value="28" />
+          <entry key="CLASS" value="4" />
+          <entry key="JAVA" value="35" />
           <entry key="XML" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="1853" />
+          <entry key="JAVA" value="1955" />
           <entry key="PLAIN_TEXT" value="10" />
           <entry key="XML" value="25" />
         </counts>
@@ -71,7 +71,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="10" />
-          <entry key="java" value="1853" />
+          <entry key="java" value="1955" />
           <entry key="xml" value="25" />
         </counts>
       </usages-collector>
@@ -80,91 +80,7 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/redis/RedisGDistributedLockHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="528">
-              <caret line="75" lean-forward="true" selection-start-line="75" selection-end-line="75" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/netchannel/client/netty/GungnirClientHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="16" selection-start-line="16" selection-end-line="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/pool/GRedisPool.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="21" column="23" selection-start-line="21" selection-start-column="23" selection-end-line="21" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/redis/DistributedLockDaemon.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="409">
-              <caret line="42" column="5" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/utils/Func.java">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/GDistributedLockHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/netchannel/client/GungnirClientProxy.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="121" column="30" selection-start-line="121" selection-start-column="30" selection-end-line="121" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/BlockCallback.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" selection-start-line="14" selection-end-line="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/utils/GeneralUtils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="21" column="6" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -173,6 +89,12 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>executorService</find>
+      <find>schedule</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -193,13 +115,14 @@
         <option value="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/GDistributedLock.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/BlockCallback.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/redis/RedisGDistributedLock.java" />
-        <option value="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/GDistributedLockHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/utils/PropertyConfigeUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/utils/GeneralUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/netchannel/client/GungnirClientProxy.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/utils/Func.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/redis/DistributedLockDaemon.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/GDistributedLockHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/redis/RedisGDistributedLockHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/netchannel/keepalive/ClientHearBeatHandler.java" />
       </list>
     </option>
   </component>
@@ -248,7 +171,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
     <option name="width" value="1378" />
     <option name="height" value="772" />
@@ -261,7 +184,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -433,15 +357,14 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1535384689480" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../gungnir-rpc-example" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1535861369800" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
@@ -460,7 +383,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Maven.gungnir-rpc [compile]">
+  <component name="RunManager" selected="Maven.gungnir-rpc [install]">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
@@ -578,9 +501,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Maven.gungnir-rpc [install]" />
         <item itemvalue="Maven.gungnir-rpc [compile]" />
         <item itemvalue="Maven.gungnir-rpc [clean]" />
-        <item itemvalue="Maven.gungnir-rpc [install]" />
       </list>
     </recent_temporary>
   </component>
@@ -618,12 +541,19 @@
       <workItem from="1535029544858" duration="210000" />
       <workItem from="1535293308799" duration="1866000" />
       <workItem from="1535370562428" duration="7271000" />
-      <workItem from="1535466093114" duration="1844000" />
+      <workItem from="1535466093114" duration="2881000" />
+      <workItem from="1535516888751" duration="707000" />
+      <workItem from="1535519442121" duration="2451000" />
+      <workItem from="1535633617795" duration="2805000" />
+      <workItem from="1535638973230" duration="1131000" />
+      <workItem from="1535816945326" duration="586000" />
+      <workItem from="1535861077377" duration="281000" />
+      <workItem from="1535903670748" duration="94000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="50306000" />
+    <option name="totallyTimeSpent" value="59398000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -635,10 +565,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="0" width="1378" height="772" extended-state="0" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27465856" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12481089" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -647,14 +576,14 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32967034" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32819724" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.56828886" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.0" />
       <window_info anchor="bottom" id="Spring" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.50392467" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.0" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.5133438" />
@@ -783,24 +712,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/utils/ApplicationContextUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/utils/CollectionUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/utils/TimeStampUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-690">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -918,29 +833,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/redis/RedisGDistributedLock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#564#565#0" expanded="true" />
-            <element signature="e#591#592#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/utils/PropertyConfigeUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="115" lean-forward="true" selection-start-line="115" selection-end-line="115" />
-          <folding>
-            <element signature="e#4597#4598#0" expanded="true" />
-            <element signature="e#4642#4643#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/UnBlockCallback.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -962,27 +854,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/redis/RedisGDistributedLockHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="75" lean-forward="true" selection-start-line="75" selection-end-line="75" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/netchannel/client/netty/GungnirClientHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="16" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/utils/GeneralUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="21" column="6" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
         </state>
       </provider>
     </entry>
@@ -993,37 +868,116 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/netchannel/client/GungnirClientProxy.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/utils/GeneralUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="121" column="30" selection-start-line="121" selection-start-column="30" selection-end-line="121" selection-end-column="30" />
+        <state relative-caret-position="272">
+          <caret line="21" column="6" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/GDistributedLockHandler.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/pool/GRedisPool.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+        <state relative-caret-position="289">
+          <caret line="21" column="23" selection-start-line="21" selection-start-column="23" selection-end-line="21" selection-end-column="23" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/utils/Func.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/redis/DistributedLockDaemon.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/redis/RedisGDistributedLockHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
-          <caret line="42" column="5" selection-start-line="42" selection-start-column="5" selection-end-line="42" selection-end-column="5" />
+        <state relative-caret-position="111">
+          <caret line="60" column="75" lean-forward="true" selection-start-line="60" selection-start-column="75" selection-end-line="60" selection-end-column="75" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/pool/GRedisPool.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/redis/clients/jedis/2.9.0/jedis-2.9.0.jar!/redis/clients/jedis/Jedis.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2363">
+          <caret line="182" column="16" selection-start-line="182" selection-start-column="16" selection-end-line="182" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/utils/ApplicationContextUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="21" column="23" selection-start-line="21" selection-start-column="23" selection-end-line="21" selection-end-column="23" />
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/redis/RedisGDistributedLock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#446#447#0" expanded="true" />
+            <element signature="e#473#474#0" expanded="true" />
+            <element signature="e#564#565#0" expanded="true" />
+            <element signature="e#591#592#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/redis/DistributedLockDaemon.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="28" column="28" selection-start-line="28" selection-start-column="28" selection-end-line="28" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1494#1495#0" expanded="true" />
+            <element signature="e#1538#1539#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/utils/Func.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/lock/GDistributedLockHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="29" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/netchannel/client/GungnirClientProxy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1598">
+          <caret line="121" column="30" selection-start-line="121" selection-start-column="30" selection-end-line="121" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/utils/PropertyConfigeUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1190">
+          <caret line="75" column="103" selection-start-line="75" selection-start-column="99" selection-end-line="75" selection-end-column="103" />
+          <folding>
+            <element signature="e#4597#4598#0" expanded="true" />
+            <element signature="e#4642#4643#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/utils/TimeStampUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/netchannel/keepalive/ClientHearBeatHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-575">
+          <caret line="11" column="30" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/github/chinalhr/gungnir/netchannel/server/netty/GungnirServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="55">
+          <caret line="79" column="27" lean-forward="true" selection-start-line="79" selection-start-column="27" selection-end-line="79" selection-end-column="27" />
         </state>
       </provider>
     </entry>

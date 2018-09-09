@@ -1,5 +1,6 @@
 package io.github.chinalhr.consumer1;
 
+import io.github.chinalhr.gungnir_rpc.lock.redis.RedisGDistributedLockHandler;
 import io.github.chinalhr.serviceapi.IDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,14 +21,16 @@ public class ConsumerController {
 
     @GetMapping
     public String TestInvoker(){
-        long startTime=System.currentTimeMillis();
-
-        for (int i = 0; i < 500; i++) {
-            String s = iDataService.helloWorld();
-            System.out.println("获取到数据==================>"+s);
-        }
-        long endTime=System.currentTimeMillis();
-        return "程序运行时间： "+(endTime-startTime)+"ms";
+//        long startTime=System.currentTimeMillis();
+//        for (int i = 0; i < 500; i++) {
+//            String s = iDataService.helloWorld();
+//            System.out.println("获取到数据==================>"+s);
+//        }
+//        long endTime=System.currentTimeMillis();
+//        return "程序运行时间： "+(endTime-startTime)+"ms";
+        RedisGDistributedLockHandler lockHandler = new RedisGDistributedLockHandler();
+//        lockHandler.tryLock()
+        return "OK";
     }
 
 }

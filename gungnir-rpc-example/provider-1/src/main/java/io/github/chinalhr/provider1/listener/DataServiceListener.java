@@ -1,8 +1,8 @@
 package io.github.chinalhr.provider1.listener;
 
-import io.github.chinalhr.gungnir.annonation.GServiceListener;
-import io.github.chinalhr.gungnir.listener.ProviderInvokerListener;
-import io.github.chinalhr.gungnir.protocol.GRequest;
+import io.github.chinalhr.gungnir_rpc.annonation.GServiceListener;
+import io.github.chinalhr.gungnir_rpc.listener.ProviderInvokerListener;
+import io.github.chinalhr.gungnir_rpc.protocol.GRequest;
 import io.github.chinalhr.serviceapi.IDataService;
 
 /**

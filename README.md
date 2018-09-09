@@ -3,8 +3,8 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/ChinaLHR/Gungnir/blob/master/LICENSE)
 [![Build Status](https://travis-ci.org/ChinaLHR/Gungnir.svg?branch=master)](https://travis-ci.org/ChinaLHR/Gungnir)
 
-## 简介
-Gungnir基于Spring、Netty、Zookeeper，是一个轻量级的分布式RPC服务框架
+## Gungnir-RPC简介
+Gungnir-RPC基于Spring、Netty、Zookeeper，是一个轻量级的分布式RPC服务框架
 
 ## 特征
 
@@ -124,9 +124,10 @@ Gungnir基于Spring、Netty、Zookeeper，是一个轻量级的分布式RPC服�
 
 ## TODO
 
-- 分布式锁的引入
-- 使用JMX（Java Management Extensions）技术对Gungnir进行服务提供者调用监控
-- 增加服务治理功能，如：服务下线，服务依赖关系分析，服务调用链路分析...
-- 增加熔断降级机制（考虑整合hystrix）
-- 对Gungnir进行性能分析
-- 优化服务消费者进行服务调用的异步逻辑
+- [x] 基于SnowFlake分布式UID生成服务
+- [ ] 分布式锁的引入
+- [ ] 使用JMX（Java Management Extensions）技术对Gungnir进行服务提供者调用监控
+- [ ] 增加服务治理功能，如：服务下线，服务依赖关系分析，服务调用链路分析...
+- [ ] 增加熔断降级机制（考虑整合hystrix）
+- [ ] 对Gungnir进行性能分析
+- [ ] 优化服务消费者进行服务调用的异步逻辑
