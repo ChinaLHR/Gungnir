@@ -6,7 +6,7 @@
 ## Gungnir-RPC简介
 Gungnir-RPC基于Spring、Netty、Zookeeper，是一个轻量级的分布式RPC服务框架
 
-## 特征
+### 特征
 
 - 基于zookeeper的服务注册与服务发现
 - 服务端支持多种序列化协议：Hessian、Kryo、Protobuf
@@ -17,14 +17,14 @@ Gungnir-RPC基于Spring、Netty、Zookeeper，是一个轻量级的分布式RPC�
 - 基于Netty IdleStateHandler实现Ping-Pong心跳重连机制
 - 客户端服务消费者异步调用服务，支持自定义Netty Channel Queue大小
 
-## 实现
-### 服务的发布与服务的引入
+### 实现
+#### 服务的发布与服务的引入
 发布：GungnirServerFactory通过实现ApplicationContextAware接口，利用setApplicationContext达到对当前程序的GService的获取，用ServiceName-Object来维护GService集合<br/>
 引入：GungnirClientProxy通过实现FactoryBean接口，再调用服务时
 
-## 使用
+### 使用
 
-### 服务提供者
+#### 服务提供者
 
 ①配置服务提供者属性
 
@@ -85,7 +85,7 @@ Gungnir-RPC基于Spring、Netty、Zookeeper，是一个轻量级的分布式RPC�
 	    }
 	}
 
-### 服务消费者
+#### 服务消费者
 
 ① 配置服务消费者属性
 	
@@ -110,7 +110,7 @@ Gungnir-RPC基于Spring、Netty、Zookeeper，是一个轻量级的分布式RPC�
 	@Autowired
     private IDataService iDataService;
 
-### Zookeeper与Netty配置
+#### Zookeeper与Netty配置
 在Resources中建立gungnir.properties文件进行配置
 	
 	zkAddress=127.0.0.1:2181
@@ -118,7 +118,7 @@ Gungnir-RPC基于Spring、Netty、Zookeeper，是一个轻量级的分布式RPC�
 	zkConnection_TimeOut=1000
 	netChannelSize=5
 
-### 使用参考
+#### 使用参考
 
 [https://github.com/ChinaLHR/Gungnir/tree/master/gungnir-rpc-example](https://github.com/ChinaLHR/Gungnir/tree/master/gungnir-rpc-example)
 
