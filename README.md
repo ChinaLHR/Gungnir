@@ -118,9 +118,12 @@ Gungnir-RPC基于Spring、Netty、Zookeeper，是一个轻量级的分布式RPC�
 	zkConnection_TimeOut=1000
 	netChannelSize=5
 
-#### 使用参考
+### 使用参考
 
 [https://github.com/ChinaLHR/Gungnir/tree/master/gungnir-rpc-example](https://github.com/ChinaLHR/Gungnir/tree/master/gungnir-rpc-example)
+
+## Gungnir-Uid-Generate简介
+Gungnir-Uid-Generate核心是Twitter SnowFlake算法,基于Netty,Redis实现的分布式UID生成服务
 
 ## TODO
 
