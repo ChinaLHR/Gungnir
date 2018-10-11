@@ -124,6 +124,7 @@ Gungnir-RPC基于Spring、Netty、Zookeeper，是一个轻量级的分布式RPC�
 
 ## Gungnir-Uid-Generate简介
 Gungnir-Uid-Generate核心是Twitter SnowFlake算法,基于Netty,Redis实现的分布式UID生成服务
+参考：[https://chinalhr.github.io/post/uidgenerateserver/](https://chinalhr.github.io/post/uidgenerateserver/)
 
 ## TODO
 
