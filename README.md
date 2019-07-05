@@ -4,9 +4,9 @@
 [![Build Status](https://travis-ci.org/ChinaLHR/Gungnir.svg?branch=master)](https://travis-ci.org/ChinaLHR/Gungnir)
 
 ## Gungnir简介
-gungnir-rpc:基于Spring、Netty、Zookeeper，是一个轻量级的分布式RPC服务框架
-gungnir-uid-generate:基于SnowFlake算法的分布式ID生成服务,支持HTTP接口接入与SDK(TCP)接入
-gungnir-distributed-lock:分布式锁实现
+- gungnir-rpc:基于Spring、Netty、Zookeeper，是一个轻量级的分布式RPC服务框架
+- gungnir-uid-generate:基于SnowFlake算法的分布式ID生成服务,支持HTTP接口接入与SDK(TCP)接入
+- gungnir-distributed-lock:分布式锁实现
 
 ### gungnir-rpc相关
 
