@@ -1,6 +1,6 @@
 package io.github.chinalhr.provider1;
 
-import io.github.chinalhr.gungnir_rpc.netchannel.server.GungnirServerFactory;
+import io.github.chinalhr.gungnir.netchannel.server.GungnirServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

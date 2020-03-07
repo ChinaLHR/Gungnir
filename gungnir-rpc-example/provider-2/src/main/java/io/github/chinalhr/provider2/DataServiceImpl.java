@@ -1,7 +1,6 @@
 package io.github.chinalhr.provider2;
 
-import io.github.chinalhr.gungnir_rpc.annonation.GService;
-import io.github.chinalhr.serviceapi.IDataService;
+import io.github.chinalhr.gungnir.annonation.GService;
 
 /**
  * @Author : ChinaLHR

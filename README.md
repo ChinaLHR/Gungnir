@@ -3,14 +3,12 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/ChinaLHR/Gungnir/blob/master/LICENSE)
 [![Build Status](https://travis-ci.org/ChinaLHR/Gungnir.svg?branch=master)](https://travis-ci.org/ChinaLHR/Gungnir)
 
+**⚠ 本项目已停止维护更新**	
+
 ## Gungnir简介
 - gungnir-rpc:基于Spring、Netty、Zookeeper，是一个轻量级的分布式RPC服务框架
-- gungnir-uid-generate:基于SnowFlake算法的分布式ID生成服务,支持HTTP接口接入与SDK(TCP)接入
-- gungnir-distributed-lock:分布式锁实现
 
-### gungnir-rpc相关
-
-#### 特征
+### 特征
 - 基于zookeeper的服务注册与服务发现
 - 服务端支持多种序列化协议：Hessian、Kryo、Protobuf
 - 服务端支持多种软负载均衡策略：轮询、随机、加权轮询、加权随机、一致性哈希
@@ -20,12 +18,12 @@
 - 基于Netty IdleStateHandler实现Ping-Pong心跳重连机制
 - 客户端服务消费者异步调用服务，支持自定义Netty Channel Queue大小
 
-#### 实现
+### 实现
 - 服务的发布与服务的引入
 发布：GungnirServerFactory通过实现ApplicationContextAware接口，利用setApplicationContext达到对当前程序的GService的获取，用ServiceName-Object来维护GService集合<br/>
 引入：GungnirClientProxy通过实现FactoryBean接口，再调用服务时
 
-#### 使用
+### 使用
 
 - 服务提供者
 
@@ -122,20 +120,14 @@
         zkConnection_TimeOut=1000
         netChannelSize=5
 
-#### 使用参考
+### 使用参考
 
 [https://github.com/ChinaLHR/Gungnir/tree/master/gungnir-rpc-example](https://github.com/ChinaLHR/Gungnir/tree/master/gungnir-rpc-example)
 
-### gungnir-uid-generate相关
-
-#### 特征
-
-
 ## TODO
 
-- [ ] 基于SnowFlake分布式UID生成服务
-- [ ] 分布式锁的引入
-- [ ] 增加服务治理功能，如：服务下线，服务依赖关系分析，服务调用链路分析...
+- [ ] 增加服务治理功能，如：服务下线，服务依赖关系分析...
 - [ ] 增加熔断降级机制
 - [ ] 对Gungnir进行性能测试
 - [ ] 优化服务消费者进行服务调用的异步逻辑
+- [ ] Spring boot start 支持
