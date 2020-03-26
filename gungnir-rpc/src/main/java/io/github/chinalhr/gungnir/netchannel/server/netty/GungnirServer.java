@@ -42,20 +42,11 @@ public class GungnirServer implements IServer {
     public void init() {
         LOGGER.info("GungnirServer Init");
 
-        defaultGroup = new DefaultEventLoopGroup(8, (r) -> {
-            AtomicInteger integer = new AtomicInteger(0);
-            return new Thread(r, "ServerDefaultGroup" + integer.incrementAndGet());
-        });
+        defaultGroup = new DefaultEventLoopGroup(8);
 
-        bossGroup = new NioEventLoopGroup(GeneralUtils.getThreadConfigNumberOfIO(), (r) -> {
-            AtomicInteger integer = new AtomicInteger(0);
-            return new Thread(r, "ServerBossGroup" + integer.incrementAndGet());
-        });
+        bossGroup = new NioEventLoopGroup(GeneralUtils.getThreadConfigNumberOfIO());
 
-        workGroup = new NioEventLoopGroup(GeneralUtils.getThreadConfigNumberOfIO(), (r) -> {
-            AtomicInteger integer = new AtomicInteger(0);
-            return new Thread(r, "ServerWorkGroup" + integer.incrementAndGet());
-        });
+        workGroup = new NioEventLoopGroup(GeneralUtils.getThreadConfigNumberOfIO());
 
         bootStrap = new ServerBootstrap();
         executorService = Executors.newScheduledThreadPool(2);

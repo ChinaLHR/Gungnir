@@ -17,11 +17,6 @@ public class GungnirClientHandler extends SimpleChannelInboundHandler<GResponse>
     private static final Logger LOGGER = LoggerFactory.getLogger(GungnirClientHandler.class);
 
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, GResponse response) throws Exception {
-        GResponseHolder.putGResponse(response);
-    }
-
-    @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         LOGGER.error("Gungnir Client Netty caught exception",cause);
         ctx.close();
@@ -30,5 +25,10 @@ public class GungnirClientHandler extends SimpleChannelInboundHandler<GResponse>
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
         ctx.flush();
+    }
+
+    @Override
+    protected void messageReceived(ChannelHandlerContext ctx, GResponse msg) throws Exception {
+        GResponseHolder.putGResponse(msg);
     }
 }

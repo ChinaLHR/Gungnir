@@ -24,15 +24,6 @@ public class GServerHandler extends SimpleChannelInboundHandler<GRequest> implem
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GServerHandler.class);
 
-    @Override
-    protected void channelRead0(ChannelHandlerContext ctx, GRequest request) throws Exception {
-        ExecutorService handlerThreadPool = GungnirServerThreadPoolManager.getHandlerThreadPool();
-        handlerThreadPool.execute(()->{
-            FilterInvoker filterInvoker = FilterOperation.buildInvokerChain(this);
-            GResponse response = filterInvoker.invoker(request);
-            ctx.writeAndFlush(response);
-        });
-    }
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
@@ -43,5 +34,15 @@ public class GServerHandler extends SimpleChannelInboundHandler<GRequest> implem
     @Override
     public GResponse invoker(GRequest request) {
         return InvokeOperation.invokeService(request, null);
+    }
+
+    @Override
+    protected void messageReceived(ChannelHandlerContext ctx, GRequest msg) throws Exception {
+        ExecutorService handlerThreadPool = GungnirServerThreadPoolManager.getHandlerThreadPool();
+        handlerThreadPool.execute(()->{
+            FilterInvoker filterInvoker = FilterOperation.buildInvokerChain(this);
+            GResponse response = filterInvoker.invoker(msg);
+            ctx.writeAndFlush(response);
+        });
     }
 }
