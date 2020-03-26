@@ -6,17 +6,17 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="consumer-1" />
         <module name="provider-1" />
-        <module name="provider-2" />
         <module name="service-api" />
+        <module name="consumer-1" />
+        <module name="provider-2" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="consumer-1" target="1.8" />
-      <module name="provider-1" target="1.8" />
-      <module name="provider-2" target="1.8" />
-      <module name="service-api" target="1.8" />
+      <module name="consumer-1" target="1.5" />
+      <module name="provider-1" target="1.5" />
+      <module name="provider-2" target="1.5" />
+      <module name="service-api" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

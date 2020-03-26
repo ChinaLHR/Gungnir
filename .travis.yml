@@ -1,4 +1,5 @@
 language: java
-install: cd gungnir-rpc && mvn install -DskipTests=true -Dmaven.javadoc.skip=true
+sudo: false
+install: cd gungnir-rpc && mvn clean package -Dmaven.test.skip=true -Dmaven.javadoc.skip=true
 jdk:
-  - oraclejdk8
+  - openjdk8
